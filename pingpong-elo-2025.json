@@ -1,0 +1,190 @@
+{
+  "meta": {
+    "season": "2025",
+    "createdAt": "2025-10-17T13:37:44.876Z",
+    "lastUpdatedAt": "2025-10-17T14:02:27.955Z",
+    "settings": {
+      "baseElo": 1000,
+      "kBase": 32,
+      "kUseMarginMultiplier": true,
+      "kMarginFn": "ln",
+      "kMarginCap": 3,
+      "expectedScale": 400,
+      "minMatchesForRankingBoost": 10,
+      "inactivityDaysForFlag": 21,
+      "maxNameLength": 30,
+      "pointsPerGameToWin": 11
+    }
+  },
+  "players": [
+    {
+      "id": "f25501a5-f72a-43a5-8fa0-623e1a492734",
+      "name": "Michael",
+      "handle": "MCbrallo",
+      "elo": 1000,
+      "wins": 0,
+      "losses": 0,
+      "matches": 0,
+      "pointsFor": 0,
+      "pointsAgainst": 0,
+      "pointDiff": 0,
+      "avatar": {
+        "type": "base64",
+        "data": "data:image/png;base64,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",
+        "dominantColor": "#7a9097"
+      },
+      "createdAt": "2025-10-17T13:56:24.582Z",
+      "updatedAt": "2025-10-17T13:56:24.582Z",
+      "lastMatchAt": null,
+      "notes": ""
+    },
+    {
+      "id": "68b97367-6dcd-4259-b225-a1dc90fff8be",
+      "name": "Darius",
+      "handle": "AfroGuy",
+      "elo": 1000,
+      "wins": 0,
+      "losses": 0,
+      "matches": 0,
+      "pointsFor": 0,
+      "pointsAgainst": 0,
+      "pointDiff": 0,
+      "avatar": {
+        "type": "base64",
+        "data": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAABtklEQVR4AeyVMU7DUAyGn3INNujOAhNFPQFscAU2WJgZuEGvARusLFG7lYW9sCFxC+CzZMmEl1ApjYOlJ/Wv/9hOnu3faauU0mdk0MB3/XE/pYGxtSsKFAV6TqCsUM8B9r69KNB7hD0fUE2PLtO28LB7kLwhK7RYzlvnYGOW2xva/DZnKC4NHE+v5Pmz2b5Y+6UxfPCunJPXVfKGNEBxoK5fMFlMJjvi78qRBOcvaaBrBTS2Xr8n5c0a1f+4d5i8IQ2wGhR1d3+D+QGN4YT/lUOeJ6QBneD52e2vszVGAN6V473/nCcNMFktEAsoFksMDpTjB/iw+LHe68N50gCHAy0kxzWmtpnD9RiQBnSSuQJszHKbq34k9YY0oFPVQihOOTH4YjlPyokD/Fj82DEgDejBtpAm12u13GM516uL6+QNaUAnSRFN2JjlNk/9H0918oY00JykLc7GLG/LsX4PXjG9bcH7BeY8UcBjUkOdUfFnEBnxFWCPIqOs0FAv56bPrSKvD7XHf4kj/4RSe3wFTt+eU2TEV2DTn6v/mlcUGFuZokBWAUdnUcBx2NmjigLZsTg6wyvwBQAA///+Bc7EAAAABklEQVQDAPNcO21IpvcuAAAAAElFTkSuQmCC",
+        "dominantColor": "#5f3d47"
+      },
+      "createdAt": "2025-10-17T13:56:33.689Z",
+      "updatedAt": "2025-10-17T13:56:43.413Z",
+      "lastMatchAt": null,
+      "notes": ""
+    },
+    {
+      "id": "34cc4212-a0eb-4f1c-949b-538638867679",
+      "name": "Kenneth",
+      "handle": "Ken",
+      "elo": 1000,
+      "wins": 0,
+      "losses": 0,
+      "matches": 0,
+      "pointsFor": 0,
+      "pointsAgainst": 0,
+      "pointDiff": 0,
+      "avatar": {
+        "type": "base64",
+        "data": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAABtklEQVR4AeyVMU7DUAyGn3INNujOAhNFPQFscAU2WJgZuEGvARusLFG7lYW9sCFxC+CzZMmEl1ApjYOlJ/Wv/9hOnu3faauU0mdk0MB3/XE/pYGxtSsKFAV6TqCsUM8B9r69KNB7hD0fUE2PLtO28LB7kLwhK7RYzlvnYGOW2xva/DZnKC4NHE+v5Pmz2b5Y+6UxfPCunJPXVfKGNEBxoK5fMFlMJjvi78qRBOcvaaBrBTS2Xr8n5c0a1f+4d5i8IQ2wGhR1d3+D+QGN4YT/lUOeJ6QBneD52e2vszVGAN6V473/nCcNMFktEAsoFksMDpTjB/iw+LHe68N50gCHAy0kxzWmtpnD9RiQBnSSuQJszHKbq34k9YY0oFPVQihOOTH4YjlPyokD/Fj82DEgDejBtpAm12u13GM516uL6+QNaUAnSRFN2JjlNk/9H0918oY00JykLc7GLG/LsX4PXjG9bcH7BeY8UcBjUkOdUfFnEBnxFWCPIqOs0FAv56bPrSKvD7XHf4kj/4RSe3wFTt+eU2TEV2DTn6v/mlcUGFuZokBWAUdnUcBx2NmjigLZsTg6wyvwBQAA///+Bc7EAAAABklEQVQDAPNcO21IpvcuAAAAAElFTkSuQmCC",
+        "dominantColor": "#5f3d47"
+      },
+      "createdAt": "2025-10-17T13:57:03.853Z",
+      "updatedAt": "2025-10-17T13:57:03.853Z",
+      "lastMatchAt": null,
+      "notes": ""
+    },
+    {
+      "id": "b0f0196a-bcea-4d48-8463-e805fbbdcb6d",
+      "name": "Luis",
+      "handle": "Luishhh",
+      "elo": 1000,
+      "wins": 0,
+      "losses": 0,
+      "matches": 0,
+      "pointsFor": 0,
+      "pointsAgainst": 0,
+      "pointDiff": 0,
+      "avatar": {
+        "type": "base64",
+        "data": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAEUklEQVR4AeyYfUxVdRjHP7/juXB5uxbjxUU4UozsBWTFlD/KNnthrtYUbODG2iKiElBCw82yWqu0VqvIFEuzbNSIXlb+4ahWmSvnKtOZFqTMICNqMHm73Ldzeo7gf25y4MDd3e7Z89x7dn6/3/N8v8/z/F7O0QAzktUiIPgjV6IEwp27aAaiGZhiBCK/hFSVgkoJgwMaEjMzqUHxN5YB4YAD6oAJWzAs8JYKj8iVKIFw5y6agWgGphiBSZdQgiz4p1/YiNmUSXMuNHigXd4slFGICsCrz4G1Tk8R3yWHT4qA2x9P3/Y0yiu3oB7oYvUx6I+/lmSvvB1pP2C6oGYTuMw02j36JUFMpYNmd7AKXYb3bT/+z7/k4Mq3GCxqZeCOVp4s2Ex8y1GCH+/Ht+8LjE+OwkdtZJ/L5Lcsu14m3t82geDWEd7fDUPFuXxfs4WEVSUklpTQW1pKx9I89JVFxN51O8cLltNWX8eO5ztZ2J6AnzkTR2Wjp20Cb0j0y+4PMkucXPNUCqPyH0TDuC2FeY9lE5DDgKVsiiH91l9Y9UgKuAJ82NwjPZ0XbeImx3quWQfPbIBULZHLqw/hNkyp9RD5n54l1NJBjGkQEzBYtKeT3Hf7eSXvP4bjTVaX6ahZCWNGHPy1RUA3NNxV4E6GkDnEnnRBYoiKGLhYmPOe3I2JigElp7tbRBNGdXa+FMRrDOP0ZYsAGJzZBo37oCtDiOwA5ZOCWdAoRQTL7kti3WtHhN0ATZ+lUrcYijqvhICXwrshLtWN05ctAiHlIn3WArpugJTuLEpXgOl2gW7IJIXNtfewvjYfM9bDg0X/8vIhafec5XBmouBehLfXmjFy66BodmyZskPFrvmDv17UORn/9/mhyjeCeXItsfxJjtuLxBuFbAjSOixl1PpBGiPzNQ7/dII4TZenzootApbrgOYhY6OLeUOjDLp1euMTICiRNucy+2apKdmNq68rYkDWqUR/HCuKelh60EdlWQjDkI6WEQfVNoEzjy4msM3L7scVfXqQ776CHtdNcnwwOfd1Hb92/0h2xQFmd9zL/m8z0SzMhszkgVzJjIPIx03ZJjA3I4AuK07ts5nklcLyZZDkOiJ1r2HGKa7OKmBtvQdfdjN732yn5R1QSiZvyjGm49LsGlUNB2RIDO6KLvTfwT2YA/7Q+S/EIWlx9fXSuGuAUMBN4TdwZ/n1nJ7jxwxYrdLBYdFs2xMg6qFhzF2xnGhbgl5/iiT5suH3z6d4icyF5DRqKuB4TIDqdtCuOMVV/4zYdjPRAfYJWJZloqoqHxte7yO0PcjPVfJw1EexlNTWp0GZihvNWCkp8PR7mc5rcgTGEe3taEc9DPlNELe+m3I5ZjQ8IVlQJpqaXuDjEJgSgQtGwvkfJRDO6Fu+oxmwohBOjWYgnNG3fGtmk+xKO+XWAbXSGQ4V9JErVsCcRz+DFqMEZjDYF3UVzcBFwzKDDyM+A/8DAAD//zjZboQAAAAGSURBVAMATuKXQC8THeMAAAAASUVORK5CYII=",
+        "dominantColor": "#6d2306"
+      },
+      "createdAt": "2025-10-17T13:57:45.907Z",
+      "updatedAt": "2025-10-17T13:57:45.907Z",
+      "lastMatchAt": null,
+      "notes": ""
+    },
+    {
+      "id": "a786db3a-bb10-4618-8aa9-bec755384f9f",
+      "name": "Collin",
+      "handle": "TaxEvader",
+      "elo": 1000,
+      "wins": 0,
+      "losses": 0,
+      "matches": 0,
+      "pointsFor": 0,
+      "pointsAgainst": 0,
+      "pointDiff": 0,
+      "avatar": {
+        "type": "base64",
+        "data": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAABnUlEQVR4AexZwU7CQBB9uxTEECXi0ZN6NJ74A0/+s/ETOHLUszEGjEiiNe06SyXUQ9t02GlpMs0OlO7sm3nvEdpSC8B1OTwB6r+7Qwm07Z060LoDKXXQ5dCvEBnY6lAHWpWfios44AwhO7pC+Yt4taQDMkOEgKHePYdtRHFfpntCFSFAuI0NJdCY1AWF1IECYRo7rA40JnVBIZYD7+4Lzn2URr6eHY9Kcz1WPr/Ofg0CO9gxIliclMYuGzA9lOZ6LDA3FgHnLxGYBUMvYxEI3cQ+eEwC/h5un7Lh1rIIWHsEZ0xp5FtMFuvSXI+Vz6+zzyJQp4B0rhKQVrgKXx2oUkh6Xh2QVrgKX8QBZ/4/NQHkTnwiBPy/EqAT3Tbs+WmVkOx5EQLsbhgLlQBDtKBL1IGgcjLADt8B+kn+jgBzP8XD9QTm4hKf0xu8DXpY3l7RrSoOe4utRXpskD7OcPe0AF5eMZjNcRYnmMyfQdPYsPBWBAvSJBTWMEkxWjn0foA+4ZpkjSG9b/bTrHf62N1hu9t61rkSyHRo77XzDvwCAAD//2nOUokAAAAGSURBVAMAGnHYMcTKkd8AAAAASUVORK5CYII=",
+        "dominantColor": "#be1413"
+      },
+      "createdAt": "2025-10-17T13:59:17.123Z",
+      "updatedAt": "2025-10-17T13:59:17.123Z",
+      "lastMatchAt": null,
+      "notes": ""
+    },
+    {
+      "id": "0bd3fdc7-d07f-4c35-8e7e-b98b27af4991",
+      "name": "Benedek",
+      "handle": "Ben",
+      "elo": 1000,
+      "wins": 0,
+      "losses": 0,
+      "matches": 0,
+      "pointsFor": 0,
+      "pointsAgainst": 0,
+      "pointDiff": 0,
+      "avatar": {
+        "type": "base64",
+        "data": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAAsUlEQVR4AeySuw3CQBAFV9cBHRARUwEN0C8lEBJSAAXQgj/5BZZGuvOTRvImJ7+1b+a1qlqSZ7/A9v+5jxeY7U4DGoAE8iv0udwqefINwApOj2tgtgINaAASsEIQII7nG7j/v5U8+QaOl/Ccb2pgthcNaAASsEIQII636+tRyWOFcAfgAg1AgDiuAYwQLtAABIjjGsAI4YL2e74reaxQtwEDDzUwEHb3UxroYhl4GG9gBQAA//+feNlEAAAABklEQVQDAHxFUEAtvSelAAAAAElFTkSuQmCC",
+        "dominantColor": "#6b634b"
+      },
+      "createdAt": "2025-10-17T14:00:18.531Z",
+      "updatedAt": "2025-10-17T14:00:18.531Z",
+      "lastMatchAt": null,
+      "notes": ""
+    },
+    {
+      "id": "ab2998ee-a291-4a17-8270-4254e2b24305",
+      "name": "Vinay",
+      "handle": "TheCEO",
+      "elo": 1000,
+      "wins": 0,
+      "losses": 0,
+      "matches": 0,
+      "pointsFor": 0,
+      "pointsAgainst": 0,
+      "pointDiff": 0,
+      "avatar": {
+        "type": "base64",
+        "data": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAADMklEQVR4AeyZy27TQBSG/5k4SW+wS6mqCoFogWX7AJQ9bJBQhUpfgQU7bhKXt+AZqErFtZsikJAQbcOTdEkDpTfz/5OMMJEj5eLETuXKv8+ZMx7nO+eMY1WxAMJhlhIg//AeeQJp9y7vQN6BHisw/Fto6+kstp7NYruhnedzqEov5vAjQ6qSRVzi86xitzBAwRqUAoORosV42eDMqMXZDGpixJLRoExOMRsDEB0ILFB2CRiMlSyTsJgoU1ygRWlrXBzkGWNxR0vGsQYF454eqw5YplFgQEGpSD+LEltA1qAAEBHGGHXAuA6UGNE2KhcNpFLDyk9d3B2OgVZc4gzIawAlAPcMKBAUwGQMZNUBl60yTluEDSgxFRssBUt6A1gYOjxkDAfsis6MAM43GbEAiALPBP5pbGkhx53o8FDIDZ2TgZNnikIpEaG5BOQMq/IE0u6cxY1XwK0PwO1PwNIXYPkbcHcbWNmhql2rcv8BosJK9/eqryXP8nfgzldyfibzR+DmKr+FYkuof5NjJ9oKViqr2N1d+k+KtbW4w4s6eAbau3MUVL7kV0Z9H+vJss6JJiBAX3n5Hk5+XNzP92ITTcCDCNj73sbF/FzXli+IFglwpuu7DnBh6y3EmR44tF2al8fFmq/peMw6t+hAx7dyCwSprTI5Wf8WckGeFFdMc/IZSuZgnRNNQFQCDHlj72ssXzHva5yIku6AhxKoqh2VYn4+MctC2eubi1jYWMCV91dx6e0sZtbPY+r1NCbXplBZO9e18PIeourlXlornun1GVx4cxFz7y5jfmMei5vXWr2JE6tR32+U+DPQd+KmD8gTaCrIwIenpAP8OsIJi0eFJxzwcD88cezjqVsxRXhC+US20BtGg2NeccQIFR6GkEA/OyLT0T9GHJOV7PUtxARCBVR92YZCJpUZ+WKSTUxuhzAHdoBnBnHInysPqD/Mct+Lc/sR/aaflsgUkk0Sq9sZxKx3gJUGtw14AQgY/mIiNWqPbYuqxnFqYvHI5RgPSC5mhmztyR6cHtNKj36i9jCjEpsYpQZ3vQPMZFiP/iQwwGrkCQyw2LEflXcgtiwDDA59B/4CAAD//3DyKFIAAAAGSURBVAMAuZ8xXmrZ7vIAAAAASUVORK5CYII=",
+        "dominantColor": "#66733e"
+      },
+      "createdAt": "2025-10-17T14:02:09.408Z",
+      "updatedAt": "2025-10-17T14:02:09.408Z",
+      "lastMatchAt": null,
+      "notes": ""
+    },
+    {
+      "id": "50503548-47f3-44b2-9da0-6cea904da13b",
+      "name": "Yankit",
+      "handle": "Sailor",
+      "elo": 1000,
+      "wins": 0,
+      "losses": 0,
+      "matches": 0,
+      "pointsFor": 0,
+      "pointsAgainst": 0,
+      "pointDiff": 0,
+      "avatar": {
+        "type": "base64",
+        "data": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAADMklEQVR4AeyZy27TQBSG/5k4SW+wS6mqCoFogWX7AJQ9bJBQhUpfgQU7bhKXt+AZqErFtZsikJAQbcOTdEkDpTfz/5OMMJEj5eLETuXKv8+ZMx7nO+eMY1WxAMJhlhIg//AeeQJp9y7vQN6BHisw/Fto6+kstp7NYruhnedzqEov5vAjQ6qSRVzi86xitzBAwRqUAoORosV42eDMqMXZDGpixJLRoExOMRsDEB0ILFB2CRiMlSyTsJgoU1ygRWlrXBzkGWNxR0vGsQYF454eqw5YplFgQEGpSD+LEltA1qAAEBHGGHXAuA6UGNE2KhcNpFLDyk9d3B2OgVZc4gzIawAlAPcMKBAUwGQMZNUBl60yTluEDSgxFRssBUt6A1gYOjxkDAfsis6MAM43GbEAiALPBP5pbGkhx53o8FDIDZ2TgZNnikIpEaG5BOQMq/IE0u6cxY1XwK0PwO1PwNIXYPkbcHcbWNmhql2rcv8BosJK9/eqryXP8nfgzldyfibzR+DmKr+FYkuof5NjJ9oKViqr2N1d+k+KtbW4w4s6eAbau3MUVL7kV0Z9H+vJss6JJiBAX3n5Hk5+XNzP92ITTcCDCNj73sbF/FzXli+IFglwpuu7DnBh6y3EmR44tF2al8fFmq/peMw6t+hAx7dyCwSprTI5Wf8WckGeFFdMc/IZSuZgnRNNQFQCDHlj72ssXzHva5yIku6AhxKoqh2VYn4+MctC2eubi1jYWMCV91dx6e0sZtbPY+r1NCbXplBZO9e18PIeourlXlornun1GVx4cxFz7y5jfmMei5vXWr2JE6tR32+U+DPQd+KmD8gTaCrIwIenpAP8OsIJi0eFJxzwcD88cezjqVsxRXhC+US20BtGg2NeccQIFR6GkEA/OyLT0T9GHJOV7PUtxARCBVR92YZCJpUZ+WKSTUxuhzAHdoBnBnHInysPqD/Mct+Lc/sR/aaflsgUkk0Sq9sZxKx3gJUGtw14AQgY/mIiNWqPbYuqxnFqYvHI5RgPSC5mhmztyR6cHtNKj36i9jCjEpsYpQZ3vQPMZFiP/iQwwGrkCQyw2LEflXcgtiwDDA59B/4CAAD//3DyKFIAAAAGSURBVAMAuZ8xXmrZ7vIAAAAASUVORK5CYII=",
+        "dominantColor": "#66733e"
+      },
+      "createdAt": "2025-10-17T14:02:27.955Z",
+      "updatedAt": "2025-10-17T14:02:27.955Z",
+      "lastMatchAt": null,
+      "notes": ""
+    }
+  ],
+  "matches": []
+}

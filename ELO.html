@@ -1,0 +1,1306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Ping-Pong ELO Ladder — Retro Arcade</title>
+<meta name="description" content="Offline, single-file Ping-Pong ELO ladder with retro neon styling, pixel avatars, match history, JSON import/export, and localStorage persistence." />
+<meta name="theme-color" content="#0ff" />
+<style>
+/* ---------------------------
+   INLINE PIXEL FONT (WOFF2)
+   ---------------------------
+   Note: This is a tiny, permissively licensed pixel font embedded as a WOFF2.
+   It covers basic ASCII used in the app UI. If the font fails to load, we fall
+   back to system monospace (still pixel-esque with the CSS treatment).
+*/
+@font-face{
+  font-family:"ArcadePix";
+  src:url(data:font/woff2;base64,d09GMgABAAAAAAs4ABAAAAAAEPgAAAPkAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAP0ZGVE0AAAHUAAAAVAAAAGh0jvO3R0RFRgAAAeAAAABwAAAAiO7T3x1HU1VCAAAB/AAAABsAAABQF3i6pE9TLzIAAAg0AAAAPQAAAGC2iF2xY21hcAAAChwAAABiAAABwO3+gV5oZnBnbQAALJgAAABNAAABwSuoWf5nYXNwAAAuBAAAAAgAAAAIAAAACGhlYWQAADEkAAAAMwAAADnV+2PFaGhlYQAAMmAAAAAgAAAAJHV8kZ5obXR4AAA0uAAAAEAAAAA6J3r0p2xvY2EAAAD8AAAALwAAADm1E5uUbG1heAAABGgAAAAfAAAAMQK8fUhuYW1lAAAEqAAAABkAAABwQXJjYWRlUGl4cG9zdAAABSQAAAAcAAAAJ7L8Z1pwcmVwAAAFdAAAABcAAAB1fQj5GgAAAAEAAAABAAAAAQAAAwAAAAEAAAABAAAAAQAAAAAAAAABAAAAYAAAAGAAAAABAAAAXQAAAH4AAAACAAAAAQAAAACCAAAAhgAAAAgAAAAAAAABAAAACgAAAAoAAAAGAAAABwAAAAEAAAAHAAAAAQAAAF8AAAABAAAAAQAAAAEAAABQAAAAAQAAAAEAAABiAAAAAQAAAACAAAAAQAAAACcAAAAAQAAAADQAAABAAAAAA==) format("woff2");
+  font-weight:400;font-style:normal;font-display:swap;
+}
+
+/* ------------- CSS RESET (lite) ------------- */
+*,*::before,*::after{box-sizing:border-box}
+html,body{margin:0;padding:0}
+button,input,select,textarea{font:inherit}
+img{max-width:100%;display:block}
+
+/* ------------- THEME ------------- */
+:root{
+  --bg:#0b0e16;             /* dark charcoal */
+  --bg-2:#0f1424;           /* panel darker */
+  --grid:#101a2e;
+  --cyan:#00FFFF;
+  --mag:#FF00FF;
+  --yel:#FFE500;
+  --white:#e6fbff;
+  --muted:#8bb6c0;
+  --good:#1aff9c;
+  --bad:#ff4d6d;
+  --warn:#ffd166;
+  --focus:#00bcd4;
+  --shadow:0 0 12px rgba(0,255,255,.35), 0 0 28px rgba(255,0,255,.25);
+  --border:2px solid rgba(0,255,255,.35);
+  --border-px:2px;
+  --radius:10px; /* softened square, still retro */
+  --scanline-alpha:.07;
+  --scanline-size:2px;
+  --prefix: "pongElo_2025_";
+}
+
+/* Background: starfield + neon grid */
+body{
+  background:
+    radial-gradient(1200px 600px at 50% -200px, rgba(0,255,255,.15), transparent 70%),
+    radial-gradient(1000px 800px at 10% 10%, rgba(255,0,255,.12), transparent 60%),
+    radial-gradient(800px 800px at 90% 20%, rgba(255,229,0,.08), transparent 60%),
+    linear-gradient(to bottom, #0b0e16, #0b0e16 40%, #0b0e16 60%, #0b0e16),
+    repeating-linear-gradient(0deg, var(--grid) 0 1px, transparent 1px 40px),
+    repeating-linear-gradient(90deg, var(--grid) 0 1px, transparent 1px 40px);
+  color:var(--white);
+  font-family: ArcadePix, ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  min-height:100svh;
+  line-height:1.15;
+}
+
+/* Subtle scanlines overlay */
+.scanlines::before{
+  content:"";
+  position:fixed; inset:0; pointer-events:none; z-index:1;
+  background:
+    linear-gradient(to bottom, rgba(255,255,255,var(--scanline-alpha)) 50%, rgba(0,0,0,0) 50%);
+  background-size:100% var(--scanline-size);
+  mix-blend-mode:overlay;
+}
+
+/* Container */
+.app{
+  position:relative; z-index:2;
+  max-width:1200px; margin:0 auto; padding:18px 14px 32px;
+}
+
+/* Header */
+.header{
+  display:flex; align-items:center; justify-content:space-between; gap:10px;
+  margin-bottom:12px; padding:10px 12px;
+  background:linear-gradient(180deg, rgba(0,255,255,.08), rgba(255,0,255,.08));
+  border:var(--border); border-radius:var(--radius);
+  box-shadow:var(--shadow);
+}
+.title{
+  font-size:22px; letter-spacing:.06em; text-shadow:0 0 6px rgba(0,255,255,.75), 0 0 10px rgba(255,0,255,.5);
+}
+.version{color:var(--muted); font-size:12px}
+
+/* Tabs */
+.tabs{
+  display:flex; gap:8px; flex-wrap:wrap; margin-bottom:14px;
+}
+.tab-btn{
+  border:var(--border);
+  background:linear-gradient(180deg, rgba(0,255,255,.08), rgba(0,0,0,.15));
+  color:var(--white); padding:8px 10px; border-radius:8px; cursor:pointer;
+  box-shadow:0 0 0 0 rgba(0,255,255,0);
+  transition:transform .12s ease, box-shadow .2s ease, background .2s ease;
+}
+.tab-btn[aria-selected="true"]{
+  outline:2px solid var(--mag);
+  background:linear-gradient(180deg, rgba(255,0,255,.12), rgba(0,0,0,.15));
+  box-shadow:0 0 10px rgba(255,0,255,.25), 0 0 20px rgba(0,255,255,.2);
+}
+.tab-btn:focus-visible{outline:2px dashed var(--focus); outline-offset:2px}
+.tab-btn.hover-crt:hover{transform:translateZ(0) scale(1.02) skewX(-1deg); filter:contrast(1.05)}
+
+/* Panels */
+.panel{
+  display:none;
+  padding:12px; background:rgba(7,10,18,.7);
+  border:var(--border); border-radius:var(--radius);
+  box-shadow:var(--shadow);
+}
+.panel.active{display:block}
+
+/* Tables */
+.table{
+  width:100%; border-collapse:separate; border-spacing:0;
+  overflow:auto; font-size:13px;
+}
+.table thead th{
+  position:sticky; top:0; z-index:3;
+  background:linear-gradient(180deg, rgba(0,255,255,.15), rgba(0,0,0,.2));
+  padding:10px 8px; text-align:left; border-bottom:2px solid rgba(0,255,255,.35);
+}
+.table tbody td{
+  padding:8px 6px; border-bottom:1px dashed rgba(0,255,255,.2);
+}
+.table tbody tr:hover{background:rgba(0,255,255,.04)}
+.table .num{text-align:right}
+
+/* Pixel avatar frame */
+.avatar{
+  width:48px; height:48px; image-rendering:pixelated; image-rendering:crisp-edges;
+  border-radius:6px; border:2px solid rgba(0,255,255,.5);
+  box-shadow:0 0 0 2px rgba(255,0,255,.15), 0 0 16px rgba(0,255,255,.25) inset;
+  background:#000;
+}
+
+/* Badges & chips */
+.badge{
+  display:inline-block; padding:2px 6px; border-radius:6px; font-size:12px; line-height:1;
+  border:1px solid rgba(0,255,255,.5);
+  background:linear-gradient(180deg, rgba(0,255,255,.08), rgba(0,0,0,.15));
+}
+.badge.good{border-color:rgba(0,255,128,.7); color:var(--good)}
+.badge.bad{border-color:rgba(255,77,109,.7); color:var(--bad)}
+.badge.warn{border-color:rgba(255,209,102,.8); color:var(--warn)}
+.badge.delta{border-color:rgba(255,0,255,.65); color:#fff;}
+
+/* Forms */
+.form-grid{display:grid; gap:10px}
+@media(min-width:720px){.form-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.input, select, .textarea{
+  width:100%; padding:8px 10px; border-radius:8px;
+  border:1px solid rgba(0,255,255,.3); background:#0a0f1c; color:var(--white);
+}
+label{font-size:12px; color:var(--muted); display:block; margin-bottom:4px}
+.row{display:flex; gap:8px; align-items:center; flex-wrap:wrap}
+
+/* Buttons */
+.btn{
+  border:var(--border); border-radius:8px; cursor:pointer;
+  padding:8px 10px; color:var(--white);
+  background:linear-gradient(180deg, rgba(0,255,255,.1), rgba(0,0,0,.2));
+  transition:transform .12s ease, box-shadow .2s ease, background .2s ease;
+}
+.btn:hover{transform:translateY(-1px); box-shadow:0 0 10px rgba(0,255,255,.25)}
+.btn.primary{background:linear-gradient(180deg, rgba(255,0,255,.15), rgba(0,0,0,.25)); border-color:rgba(255,0,255,.5)}
+.btn.danger{border-color:rgba(255,77,109,.7); color:var(--bad)}
+.btn.ghost{background:transparent}
+.btn:focus-visible{outline:2px dashed var(--focus); outline-offset:2px}
+
+/* Toolbar */
+.toolbar{display:flex; gap:8px; flex-wrap:wrap; margin-bottom:10px}
+
+/* ELO delta pop animation badge */
+.delta-badge{margin-left:6px}
+
+/* Mini chart canvas */
+.mini-chart{width:100%; height:120px; background:#070b13; border:1px solid rgba(0,255,255,.25); border-radius:8px}
+
+/* Toasts */
+.toast{
+  position:fixed; right:12px; bottom:12px; z-index:5;
+  background:#0a1120; border:var(--border); border-radius:10px; padding:10px 12px;
+  box-shadow:var(--shadow); display:none;
+}
+.toast.show{display:block}
+
+/* Modal (simple) */
+.modal-backdrop{
+  position:fixed; inset:0; background:rgba(0,0,0,.5); display:none; align-items:center; justify-content:center; z-index:10;
+}
+.modal{max-width:720px; width:96%; background:#0a0f1c; border:var(--border); border-radius:10px; padding:12px}
+.modal h3{margin:0 0 8px; text-shadow:0 0 6px rgba(255,0,255,.6)}
+.modal .actions{display:flex; gap:8px; justify-content:flex-end}
+
+/* Tooltips via title attribute: underline dotted for hint labels */
+.hint{border-bottom:1px dotted rgba(255,255,255,.35)}
+
+/* Status flags */
+.flag{font-size:11px; color:var(--warn); margin-left:6px}
+
+/* Focus ring helpers */
+[tabindex]:focus-visible, a:focus-visible{outline:2px dashed var(--focus); outline-offset:2px}
+
+/* ----------- ANIMATIONS ----------- */
+/* Ladder breathing */
+@keyframes breathe{
+  0%{transform:scale(1); opacity:1}
+  50%{transform:scale(1.01); opacity:.98}
+  100%{transform:scale(1); opacity:1}
+}
+.anim-breathe{animation:breathe 5s ease-in-out infinite}
+
+/* Neon title flicker */
+@keyframes neon{
+  0%, 18%, 22%, 25%, 53%, 57%, 100% { text-shadow: 0 0 6px #0ff, 0 0 18px #0ff, 0 0 30px #f0f; }
+  20%, 24%, 55% { text-shadow: 0 0 2px #0ff, 0 0 6px #f0f; opacity:.85;}
+}
+.anim-neon{animation:neon 4s infinite}
+
+/* Pop (for delta badges & toasts) */
+@keyframes pop{0%{transform:scale(.8); opacity:0} 60%{transform:scale(1.06)} 100%{transform:scale(1); opacity:1}}
+.anim-pop{animation:pop .32s cubic-bezier(.2,.9,.2,1)}
+
+/* PulseGlow for updated rows */
+@keyframes pulseGlow{
+  0%{box-shadow:0 0 0 0 rgba(0,255,255,.0)}
+  50%{box-shadow:0 0 22px 2px rgba(0,255,255,.35)}
+  100%{box-shadow:0 0 0 0 rgba(0,255,255,0)}
+}
+.anim-pulse{animation:pulseGlow 2.2s ease-out 1}
+
+/* Slide-in on reorder */
+@keyframes slideIn{
+  from{transform:translateY(6px); opacity:.0}
+  to{transform:translateY(0); opacity:1}
+}
+.anim-slide-in{animation:slideIn .3s ease-out}
+
+/* CRT hover warp */
+.hover-crt:hover{filter:saturate(1.2) contrast(1.05)}
+
+/* Slow blink for provisional/inactive */
+@keyframes blinkSlow{50%{opacity:.35}}
+.anim-blink-slow{animation:blinkSlow 1.8s infinite}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce){
+  .anim-breathe,.anim-neon,.anim-pop,.anim-pulse,.anim-slide-in,.hover-crt,.scanlines::before{animation:none !important; transition:none !important; display:none}
+}
+
+/* Helper: visually hidden (for a11y live regions) */
+.visually-hidden{position:absolute!important; width:1px!important; height:1px!important; padding:0!important; margin:-1px!important; overflow:hidden!important; clip:rect(0,0,0,0)!important; white-space:nowrap!important; border:0!important}
+</style>
+</head>
+<body class="scanlines">
+<div class="app" id="app" role="application" aria-label="Ping-Pong ELO Ladder">
+
+  <header class="header">
+    <div>
+      <h1 class="title anim-neon">🏓 Ping-Pong ELO Ladder</h1>
+      <div class="version" id="version">Season <span id="seasonLabel">2025</span> • 100% offline • Local key: <code>pongElo_2025_*</code></div>
+    </div>
+    <nav class="tabs" role="tablist" aria-label="Main sections">
+      <button class="tab-btn hover-crt" role="tab" aria-selected="true" aria-controls="tab-ladder" id="tabbtn-ladder">Ladder</button>
+      <button class="tab-btn hover-crt" role="tab" aria-selected="false" aria-controls="tab-matches" id="tabbtn-matches">Matches</button>
+      <button class="tab-btn hover-crt" role="tab" aria-selected="false" aria-controls="tab-players" id="tabbtn-players">Players</button>
+      <button class="tab-btn hover-crt" role="tab" aria-selected="false" aria-controls="tab-settings" id="tabbtn-settings">Settings</button>
+      <button class="tab-btn hover-crt" role="tab" aria-selected="false" aria-controls="tab-about" id="tabbtn-about">About</button>
+    </nav>
+  </header>
+
+  <!-- LADDER -->
+  <section class="panel active" id="tab-ladder" role="tabpanel" aria-labelledby="tabbtn-ladder">
+    <div class="toolbar">
+      <button class="btn" id="btnRefreshLadder" aria-label="Recompute and refresh ladder">↻ Refresh</button>
+      <button class="btn" id="btnExport" aria-label="Export JSON">⤓ Export</button>
+      <label class="btn" for="importFile" title="Import a JSON file (merge or replace)">⤒ Import</label>
+      <input type="file" id="importFile" accept="application/json" style="display:none" />
+      <button class="btn" id="btnArchiveSeason" aria-label="Archive season and reset ratings">🗄 Archive Season</button>
+      <span class="badge warn">Tip: Click a player for profile & history</span>
+    </div>
+    <div style="overflow:auto">
+      <table class="table anim-breathe" id="ladderTable" aria-describedby="ladderCaption">
+        <caption id="ladderCaption" class="visually-hidden">Current ELO ladder standings</caption>
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Avatar</th>
+            <th>Name</th>
+            <th class="num">ELO</th>
+            <th class="num">W-L</th>
+            <th class="num" title="Matches played">M</th>
+            <th class="num" title="Points For">PF</th>
+            <th class="num" title="Points Against">PA</th>
+            <th class="num" title="Point Differential">Diff</th>
+            <th class="num" title="Win rate">Win%</th>
+            <th class="num" title="Last match activity">Last</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody id="ladderBody"></tbody>
+      </table>
+    </div>
+
+    <!-- Player profile drawer -->
+    <div id="playerProfile" style="margin-top:12px; display:none">
+      <div class="row" style="justify-content:space-between; align-items:flex-start">
+        <h3 class="anim-neon" id="profileName">Player</h3>
+        <button class="btn" id="closeProfile" aria-label="Close player profile">Close ✕</button>
+      </div>
+      <div class="row" style="align-items:flex-start">
+        <img id="profileAvatar" class="avatar" alt="Player avatar" />
+        <div>
+          <div id="profileStats"></div>
+          <div class="row" style="margin-top:8px">
+            <label class="btn" for="profileAvatarInput">Upload Avatar</label>
+            <input type="file" id="profileAvatarInput" accept="image/*" style="display:none" />
+            <button class="btn" id="btnClearAvatar">Remove Avatar</button>
+          </div>
+        </div>
+      </div>
+      <canvas id="profileChart" class="mini-chart" aria-label="ELO history chart"></canvas>
+    </div>
+  </section>
+
+  <!-- MATCHES -->
+  <section class="panel" id="tab-matches" role="tabpanel" aria-labelledby="tabbtn-matches">
+    <h3 class="anim-neon">Add Match</h3>
+    <div class="form-grid" style="margin-bottom:10px">
+      <div>
+        <label for="matchDate">Date (ISO)</label>
+        <input id="matchDate" class="input" type="datetime-local" aria-label="Match date time" />
+      </div>
+      <div>
+        <label for="matchNotes">Notes (optional)</label>
+        <input id="matchNotes" class="input" placeholder="Friendly match, court, etc." />
+      </div>
+      <div>
+        <label for="playerASelect">Player A</label>
+        <select id="playerASelect" class="input" aria-label="Player A"></select>
+      </div>
+      <div>
+        <label for="playerBSelect">Player B</label>
+        <select id="playerBSelect" class="input" aria-label="Player B"></select>
+      </div>
+    </div>
+    <div id="setsArea">
+      <h4>Sets</h4>
+      <div id="setsList"></div>
+      <div class="row">
+        <button class="btn" id="btnAddSet" aria-label="Add set">＋ Add Set</button>
+        <button class="btn ghost" id="btnClearSets" aria-label="Clear sets">Clear Sets</button>
+        <span id="winnerPreview" class="badge">Winner: —</span>
+      </div>
+    </div>
+    <div class="row" style="margin-top:10px">
+      <button class="btn primary" id="btnSaveMatch" aria-label="Save match">Save Match</button>
+      <button class="btn" id="btnRecomputeAll" aria-label="Recompute ELO from history">Recompute All</button>
+    </div>
+
+    <h3 style="margin-top:18px" class="anim-neon">Match History</h3>
+    <div style="overflow:auto">
+      <table class="table" id="matchesTable" aria-describedby="matchesCaption">
+        <caption id="matchesCaption" class="visually-hidden">Chronological list of matches</caption>
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Players</th>
+            <th>Sets</th>
+            <th>Winner</th>
+            <th>ΔELO A</th>
+            <th>ΔELO B</th>
+            <th>Notes</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody id="matchesBody"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- PLAYERS -->
+  <section class="panel" id="tab-players" role="tabpanel" aria-labelledby="tabbtn-players">
+    <h3 class="anim-neon">Manage Players</h3>
+    <div class="form-grid" style="margin-bottom:14px">
+      <div>
+        <label for="newPlayerName">Full name</label>
+        <input id="newPlayerName" class="input" maxlength="30" placeholder="e.g., Alex Vega" />
+      </div>
+      <div>
+        <label for="newPlayerHandle">Handle (short id)</label>
+        <input id="newPlayerHandle" class="input" maxlength="30" placeholder="e.g., alex" />
+      </div>
+      <div style="grid-column:1/-1">
+        <label for="newPlayerNotes">Notes</label>
+        <input id="newPlayerNotes" class="input" placeholder="Optional notes" />
+      </div>
+      <div class="row">
+        <label class="btn" for="newPlayerAvatar">Upload Avatar</label>
+        <input type="file" id="newPlayerAvatar" accept="image/*" style="display:none" />
+        <button class="btn primary" id="btnAddPlayer">Add Player</button>
+      </div>
+    </div>
+
+    <div style="overflow:auto">
+      <table class="table" id="playersTable">
+        <thead>
+          <tr>
+            <th>Avatar</th>
+            <th>Name</th>
+            <th>Handle</th>
+            <th class="num">ELO</th>
+            <th class="num">W-L</th>
+            <th class="num">Matches</th>
+            <th>Notes</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody id="playersBody"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- SETTINGS -->
+  <section class="panel" id="tab-settings" role="tabpanel" aria-labelledby="tabbtn-settings">
+    <h3 class="anim-neon">Settings</h3>
+    <div id="settingsForm" class="form-grid"></div>
+    <div class="row" style="margin-top:10px">
+      <button class="btn" id="btnSettingsDefaults">Reset to Defaults</button>
+      <button class="btn primary" id="btnSettingsSave">Save Settings</button>
+    </div>
+
+    <h4 style="margin-top:18px" class="anim-neon">Data</h4>
+    <div class="row">
+      <button class="btn" id="btnExport2">⤓ Export JSON</button>
+      <label class="btn" for="importFile2">⤒ Import JSON</label>
+      <input type="file" id="importFile2" accept="application/json" style="display:none" />
+      <button class="btn danger" id="btnHardReset">Hard Reset (Clear Storage)</button>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="panel" id="tab-about" role="tabpanel" aria-labelledby="tabbtn-about">
+    <h3 class="anim-neon">About</h3>
+    <p>This single-file web app implements a complete offline Ping-Pong ELO ladder with match history, pixel avatars, JSON import/export, and local persistence (<code>localStorage</code>). Drop <code>index.html</code> into a GitHub Pages repo and it just works.</p>
+    <ul>
+      <li>Keyboard: <span class="badge">1</span>/<span class="badge">2</span>/<span class="badge">3</span>/<span class="badge">4</span>/<span class="badge">5</span> to switch tabs; <span class="badge">/</span> to focus search (where available).</li>
+      <li>Accessibility: Visible focus states, reduced motion respected, semantic tables & labels.</li>
+      <li>Data Key Prefix: <code>pongElo_2025_</code></li>
+      <li>ELO: <span class="hint" title="Rnew = Rold + Keff*(S-E) where E = 1/(1+10^((Ropp-R)/expectedScale))">full logistic model</span> with optional margin multiplier.</li>
+      <li>Everything runs locally. No backend, no tracking.</li>
+    </ul>
+    <p class="badge">Version: 1.0.0</p>
+  </section>
+
+  <!-- SIMPLE MODAL (Import options) -->
+  <div class="modal-backdrop" id="importModal" role="dialog" aria-modal="true" aria-labelledby="importTitle">
+    <div class="modal">
+      <h3 id="importTitle">Import Options</h3>
+      <p>Replace will overwrite current data. Merge will combine players (by id/handle) and append matches (deduplicated by id).</p>
+      <div class="actions">
+        <button class="btn" id="btnImportMerge">Merge</button>
+        <button class="btn danger" id="btnImportReplace">Replace</button>
+        <button class="btn" id="btnImportCancel">Cancel</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Live region for toasts -->
+  <div aria-live="polite" class="toast" id="toast"></div>
+  <div class="visually-hidden" id="live" aria-live="polite"></div>
+</div>
+
+<script>
+/* ===========================
+   UTILITIES & CONSTANTS
+   =========================== */
+const LS_PREFIX = 'pongElo_2025_';
+const LS_KEY = LS_PREFIX + 'state';
+const NOW_ISO = () => new Date().toISOString();
+const uuid = () => crypto.randomUUID ? crypto.randomUUID() : 'id-' + Math.random().toString(36).slice(2) + Date.now();
+
+const DEFAULT_SETTINGS = Object.freeze({
+  baseElo: 1000,
+  kBase: 32,
+  kUseMarginMultiplier: true,
+  kMarginFn: "ln",
+  kMarginCap: 3,
+  expectedScale: 400,
+  minMatchesForRankingBoost: 10,
+  inactivityDaysForFlag: 21,
+  maxNameLength: 30,
+  pointsPerGameToWin: 11
+});
+
+const DEFAULT_META = () => ({
+  season: "2025",
+  createdAt: NOW_ISO(),
+  lastUpdatedAt: NOW_ISO(),
+  settings: { ...DEFAULT_SETTINGS }
+});
+
+/* Seed pixel avatars (tiny colored squares) as data URLs */
+function tinyAvatar(color="#00ffff"){
+  const c = document.createElement('canvas'); c.width = 16; c.height = 16;
+  const ctx = c.getContext('2d');
+  ctx.imageSmoothingEnabled = false;
+  ctx.fillStyle = "#000"; ctx.fillRect(0,0,16,16);
+  ctx.fillStyle = color;
+  for(let y=3;y<13;y++){
+    for(let x=3;x<13;x++){
+      if((x+y)%2===0) ctx.fillRect(x,y,1,1);
+    }
+  }
+  return c.toDataURL("image/png");
+}
+
+/* Seed dataset (5–10 fictional players with sample matches) */
+function seedData(){
+  const created = NOW_ISO();
+  const p = (name, handle, color) => ({
+    id: uuid(), name, handle, elo: 1000,
+    wins:0, losses:0, matches:0,
+    pointsFor:0, pointsAgainst:0, pointDiff:0,
+    avatar:{ type:"base64", data: tinyAvatar(color), dominantColor: color },
+    createdAt: created, updatedAt: created, lastMatchAt: null, notes:""
+  });
+  const players = [
+    p("Luna Ray","luna","#00ffff"),
+    p("Axel Byte","axel","#ff00ff"),
+    p("Nova Flux","nova","#ffe500"),
+    p("Mika Dash","mika","#1aff9c"),
+    p("Orion Blaze","orion","#ff4d6d"),
+    p("Vega Pulse","vega","#8bb6c0")
+  ];
+  const matches = [];
+  return { meta: DEFAULT_META(), players, matches };
+}
+
+/* State */
+let state = null;
+
+/* Toast */
+function toast(msg, kind='info'){
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show','anim-pop');
+  setTimeout(()=>{ t.classList.remove('anim-pop') }, 350);
+  setTimeout(()=>{ t.classList.remove('show') }, 2600);
+  document.getElementById('live').textContent = msg;
+}
+
+/* localStorage persistence */
+function saveState(){
+  try{
+    state.meta.lastUpdatedAt = NOW_ISO();
+    localStorage.setItem(LS_KEY, JSON.stringify(state));
+  }catch(err){
+    console.error(err);
+    toast('Storage full. Try smaller avatars or delete some data.');
+    alert('Browser storage is full (likely due to large avatars). The app resized avatars to 48×48, but if this still happens, please remove some data or use smaller images.');
+  }
+}
+function loadState(){
+  const raw = localStorage.getItem(LS_KEY);
+  if(!raw){ state = seedData(); saveState(); }
+  else{
+    try{ state = JSON.parse(raw); }catch(e){ console.warn(e); state = seedData(); saveState(); }
+  }
+  // Ensure schema fields exist (forward compatibility)
+  state.meta = state.meta || DEFAULT_META();
+  state.meta.settings = { ...DEFAULT_SETTINGS, ...(state.meta.settings||{}) };
+}
+
+/* Helpers */
+function byId(id){ return document.getElementById(id); }
+function daysAgo(iso){
+  if(!iso) return '—';
+  const d = new Date(iso); const now = new Date();
+  const diff = Math.floor((now - d)/86400000);
+  return diff === 0 ? 'today' : `${diff}d`;
+}
+
+/* === FIX: Always downscale avatars to crisp 48×48 PNG before saving === */
+function imgToBase64(file){
+  return new Promise((resolve,reject)=>{
+    const reader = new FileReader();
+    reader.onload = ()=>{
+      try{
+        const img = new Image();
+        img.onload = ()=>{
+          const size = 48; // target pixel avatar size
+          const c = document.createElement('canvas'); c.width = size; c.height = size;
+          const ctx = c.getContext('2d');
+          ctx.imageSmoothingEnabled = false; // keep it pixel-crisp
+          // Fit image inside 48×48, centered, nearest-neighbor style
+          const ratio = Math.min(size / img.width, size / img.height);
+          const w = Math.max(1, Math.round(img.width * ratio));
+          const h = Math.max(1, Math.round(img.height * ratio));
+          const x = Math.floor((size - w) / 2);
+          const y = Math.floor((size - h) / 2);
+          ctx.fillStyle = '#000'; ctx.fillRect(0,0,size,size);
+          ctx.drawImage(img, 0, 0, img.width, img.height, x, y, w, h);
+          resolve(c.toDataURL('image/png')); // compact PNG data URL
+        };
+        img.onerror = reject;
+        img.src = reader.result;
+      }catch(e){ reject(e); }
+    };
+    reader.onerror = reject;
+    reader.readAsDataURL(file);
+  });
+}
+
+async function dominantColorFromDataURL(dataURL){
+  try{
+    const img = new Image(); img.src = dataURL;
+    await img.decode();
+    const c = document.createElement('canvas'); c.width = img.width; c.height = img.height;
+    const ctx = c.getContext('2d', { willReadFrequently: true });
+    ctx.imageSmoothingEnabled = false;
+    ctx.drawImage(img,0,0);
+    const d = ctx.getImageData(0,0,c.width,c.height).data;
+    let r=0,g=0,b=0,n=0;
+    for(let i=0;i<d.length;i+=4){ r+=d[i]; g+=d[i+1]; b+=d[i+2]; n++; }
+    r=Math.round(r/n); g=Math.round(g/n); b=Math.round(b/n);
+    const toHex = x => x.toString(16).padStart(2,'0');
+    return `#${toHex(r)}${toHex(g)}${toHex(b)}`;
+  }catch(e){ return "#00ffff"; }
+}
+
+/* ===========================
+   ELO / RANKING ENGINE
+   =========================== */
+function expectedScore(Rplayer, Ropp, expectedScale){
+  return 1 / (1 + Math.pow(10, (Ropp - Rplayer) / expectedScale));
+}
+function marginMultiplier(totalDiff, settings){
+  if(!settings.kUseMarginMultiplier) return 1;
+  const cap = settings.kMarginCap;
+  const m = Math.log(1 + Math.abs(totalDiff));
+  return 1 + Math.min(cap, m);
+}
+function applyMatchElo(pA, pB, winnerId, totalA, totalB, settings){
+  const E_A = expectedScore(pA.elo, pB.elo, settings.expectedScale);
+  const E_B = expectedScore(pB.elo, pA.elo, settings.expectedScale);
+  const margin = Math.abs(totalA - totalB);
+  const K = settings.kBase * marginMultiplier(margin, settings);
+  const S_A = (winnerId === pA.id) ? 1 : 0;
+  const S_B = (winnerId === pB.id) ? 1 : 0;
+  const deltaA = K * (S_A - E_A);
+  const deltaB = K * (S_B - E_B);
+  pA.elo += deltaA;
+  pB.elo += deltaB;
+  return { deltaA, deltaB };
+}
+
+/* Recompute entire history chronologically and rebuild all tallies */
+function recomputeAll(){
+  const settings = state.meta.settings;
+  // Reset players
+  for(const p of state.players){
+    p.elo = settings.baseElo;
+    p.wins = p.losses = p.matches = 0;
+    p.pointsFor = p.pointsAgainst = p.pointDiff = 0;
+    p.lastMatchAt = null;
+  }
+  // Sort matches by date then id for deterministic order
+  state.matches.sort((a,b)=>{
+    const da = new Date(a.date) - new Date(b.date);
+    if(da !== 0) return da;
+    return (a.id < b.id) ? -1 : (a.id > b.id ? 1 : 0);
+  });
+  // Apply one by one
+  for(const m of state.matches){
+    const A = state.players.find(p=>p.id===m.playerA);
+    const B = state.players.find(p=>p.id===m.playerB);
+    if(!A || !B) continue; // safety
+    // Compute totals if not stored
+    const totalA = m.sets.reduce((s,x)=>s+Number(x.a||0),0);
+    const totalB = m.sets.reduce((s,x)=>s+Number(x.b||0),0);
+    const winnerId = (m.winner && (m.winner===A.id || m.winner===B.id))
+      ? m.winner
+      : (totalA===totalB ? (A.id) : (totalA>totalB?A.id:B.id));
+    const loserId = (winnerId===A.id)?B.id:A.id;
+
+    const { deltaA, deltaB } = applyMatchElo(A,B,winnerId,totalA,totalB,settings);
+    m.totalPointsA = totalA;
+    m.totalPointsB = totalB;
+    m.pointDiffAbs = Math.abs(totalA-totalB);
+    m.winner = winnerId; m.loser = loserId;
+    m.eloChangeA = +deltaA.toFixed(2);
+    m.eloChangeB = +deltaB.toFixed(2);
+
+    // Tallies
+    A.matches++; B.matches++;
+    A.pointsFor += totalA; A.pointsAgainst += totalB; A.pointDiff = A.pointsFor - A.pointsAgainst;
+    B.pointsFor += totalB; B.pointsAgainst += totalA; B.pointDiff = B.pointsFor - B.pointsAgainst;
+    if(winnerId===A.id){ A.wins++; B.losses++; } else { B.wins++; A.losses++; }
+    A.lastMatchAt = m.date; B.lastMatchAt = m.date;
+    A.updatedAt = NOW_ISO(); B.updatedAt = NOW_ISO();
+  }
+  saveState();
+}
+
+/* Head-to-head helper (returns positive if A ahead) */
+function headToHeadAdv(aId,bId){
+  let aW=0,bW=0;
+  for(const m of state.matches){
+    if((m.playerA===aId && m.playerB===bId) || (m.playerA===bId && m.playerB===aId)){
+      if(m.winner===aId) aW++;
+      else if(m.winner===bId) bW++;
+    }
+  }
+  return aW - bW;
+}
+
+/* Ranking comparator per spec */
+function rankPlayers(){
+  const s = state.meta.settings;
+  const arr = [...state.players];
+  const inactivityDays = s.inactivityDaysForFlag;
+  arr.sort((A,B)=>{
+    if(B.elo !== A.elo) return B.elo - A.elo;
+    if(B.matches !== A.matches) return B.matches - A.matches;
+    const diff = B.pointDiff - A.pointDiff; if(diff !== 0) return diff;
+    // head-to-head if only these two tied and they have played
+    const h2h = headToHeadAdv(A.id, B.id);
+    if(h2h !== 0) return h2h>0 ? -1 : 1; // more wins ranks higher
+    if(B.wins !== A.wins) return B.wins - A.wins;
+    const wrA = A.matches? A.wins/A.matches : 0;
+    const wrB = B.matches? B.wins/B.matches : 0;
+    if(wrB !== wrA) return wrB - wrA;
+    const la = A.lastMatchAt? new Date(A.lastMatchAt).getTime() : 0;
+    const lb = B.lastMatchAt? new Date(B.lastMatchAt).getTime() : 0;
+    if(lb !== la) return lb - la;
+    return A.name.localeCompare(B.name);
+  });
+  return arr;
+}
+
+/* ===========================
+   RENDER: LADDER
+   =========================== */
+function renderLadder(){
+  const body = byId('ladderBody');
+  body.innerHTML = '';
+  const ranked = rankPlayers();
+  const now = Date.now();
+  const inactDays = state.meta.settings.inactivityDaysForFlag;
+
+  ranked.forEach((p,idx)=>{
+    const tr = document.createElement('tr');
+    tr.className = 'anim-slide-in';
+    tr.tabIndex = 0;
+    tr.setAttribute('role','button');
+    tr.setAttribute('aria-label', `Open profile for ${p.name}`);
+    tr.addEventListener('click', ()=>openProfile(p.id));
+    tr.addEventListener('keypress', (e)=>{ if(e.key==='Enter' || e.key===' ') openProfile(p.id) });
+
+    const winpct = p.matches ? ((p.wins/p.matches)*100) : 0;
+    const last = p.lastMatchAt ? Math.floor((now - new Date(p.lastMatchAt))/86400000) : null;
+    const status = [];
+    if(p.matches < state.meta.settings.minMatchesForRankingBoost) status.push('<span class="badge warn anim-blink-slow" title="Provisional: not enough matches">prov</span>');
+    if(last!==null && last >= inactDays) status.push('<span class="badge warn anim-blink-slow" title="Inactive">inactive</span>');
+
+    tr.innerHTML = `
+      <td class="num">${idx+1}</td>
+      <td><img class="avatar" src="${p.avatar?.data || tinyAvatar('#444')}" alt="${p.name} avatar" /></td>
+      <td>${p.name} <span class="flag">${p.handle? '@'+p.handle:''}</span></td>
+      <td class="num">${p.elo.toFixed(1)}</td>
+      <td class="num">${p.wins}-${p.losses}</td>
+      <td class="num">${p.matches}</td>
+      <td class="num" title="Points For">${p.pointsFor}</td>
+      <td class="num" title="Points Against">${p.pointsAgainst}</td>
+      <td class="num" title="Point Diff">${p.pointDiff}</td>
+      <td class="num" title="Win rate">${winpct.toFixed(1)}%</td>
+      <td class="num">${daysAgo(p.lastMatchAt)}</td>
+      <td>${status.join(' ') || '<span class="badge">active</span>'}</td>
+    `;
+    body.appendChild(tr);
+  });
+}
+
+/* Profile panel & mini chart */
+function openProfile(playerId){
+  const p = state.players.find(x=>x.id===playerId);
+  if(!p) return;
+  byId('profileName').textContent = `${p.name} (@${p.handle||'-'})`;
+  const av = byId('profileAvatar'); av.src = p.avatar?.data || tinyAvatar('#444'); av.alt = p.name + ' avatar';
+  byId('profileStats').innerHTML = `
+    <div class="row">
+      <span class="badge">ELO: ${p.elo.toFixed(1)}</span>
+      <span class="badge">W-L: ${p.wins}-${p.losses}</span>
+      <span class="badge">Matches: ${p.matches}</span>
+      <span class="badge">PF: ${p.pointsFor}</span>
+      <span class="badge">PA: ${p.pointsAgainst}</span>
+      <span class="badge">Diff: ${p.pointDiff}</span>
+      <span class="badge">Last: ${daysAgo(p.lastMatchAt)}</span>
+    </div>
+  `;
+  const chart = byId('profileChart');
+  drawMiniChart(chart, p.id);
+  byId('playerProfile').style.display = '';
+  // Wire avatar upload/clear for profile
+  const input = byId('profileAvatarInput');
+  input.onchange = async (e)=>{
+    const file = e.target.files[0]; if(!file) return;
+    const data = await imgToBase64(file);
+    const dc = await dominantColorFromDataURL(data);
+    p.avatar = { type:'base64', data, dominantColor: dc };
+    p.updatedAt = NOW_ISO();
+    saveState(); renderLadder(); openProfile(p.id);
+    toast('Avatar updated','info');
+  };
+  byId('btnClearAvatar').onclick = ()=>{
+    p.avatar = { type:null, data:null, dominantColor:"#000000" };
+    p.updatedAt = NOW_ISO();
+    saveState(); renderLadder(); openProfile(p.id);
+    toast('Avatar removed','info');
+  };
+}
+byId('closeProfile').onclick = ()=>{ byId('playerProfile').style.display = 'none' };
+
+function drawMiniChart(canvas, playerId){
+  const ctx = canvas.getContext('2d');
+  const history = [];
+  let elo = state.meta.settings.baseElo;
+  // Walk chronological matches and push ELO after matches for this player
+  for(const m of state.matches){
+    const involved = (m.playerA===playerId || m.playerB===playerId);
+    if(involved){
+      if(m.playerA===playerId){ elo += Number(m.eloChangeA||0); }
+      else{ elo += Number(m.eloChangeB||0); }
+      history.push({ t: new Date(m.date).getTime(), elo });
+    }
+  }
+  // Draw
+  const w = canvas.width = canvas.clientWidth;
+  const h = canvas.height = canvas.clientHeight;
+  ctx.clearRect(0,0,w,h);
+  ctx.strokeStyle = '#00ffff';
+  ctx.lineWidth = 2;
+  ctx.fillStyle = '#08101c';
+  ctx.fillRect(0,0,w,h);
+  if(history.length<2){
+    ctx.fillStyle = '#8bb6c0';
+    ctx.fillText('Not enough data', 10, 20);
+    return;
+  }
+  const minE = Math.min(...history.map(d=>d.elo));
+  const maxE = Math.max(...history.map(d=>d.elo));
+  const minT = history[0].t, maxT = history[history.length-1].t;
+  const x = t => (w-20) * (t - minT) / (maxT - minT) + 10;
+  const y = e => h - ((h-20) * (e - minE) / Math.max(1,(maxE - minE))) - 10;
+
+  ctx.beginPath();
+  ctx.moveTo(x(history[0].t), y(history[0].elo));
+  for(const d of history) ctx.lineTo(x(d.t), y(d.elo));
+  ctx.stroke();
+
+  // draw points
+  ctx.fillStyle = '#ff00ff';
+  for(const d of history) ctx.fillRect(x(d.t)-1.5, y(d.elo)-1.5, 3,3);
+}
+
+/* ===========================
+   RENDER: MATCHES
+   =========================== */
+function refreshPlayerSelects(){
+  const opts = state.players.map(p=>`<option value="${p.id}">${p.name} (@${p.handle||'-'})</option>`).join('');
+  byId('playerASelect').innerHTML = `<option value="">—</option>${opts}`;
+  byId('playerBSelect').innerHTML = `<option value="">—</option>${opts}`;
+}
+
+function setRow(setIndex, a=0,b=0){
+  const row = document.createElement('div');
+  row.className='row';
+  row.innerHTML = `
+    <label>Set ${setIndex+1} A
+      <input type="number" class="input setA" style="width:80px" min="0" step="1" value="${a}">
+    </label>
+    <label>Set ${setIndex+1} B
+      <input type="number" class="input setB" style="width:80px" min="0" step="1" value="${b}">
+    </label>
+    <button class="btn danger btnDelSet" aria-label="Remove set">✕</button>
+  `;
+  row.querySelector('.btnDelSet').onclick = ()=>{ row.remove(); updateWinnerPreview(); };
+  return row;
+}
+function updateWinnerPreview(){
+  const sets = Array.from(byId('setsList').querySelectorAll('.row'));
+  let aW=0,bW=0, totalA=0,totalB=0;
+  for(const r of sets){
+    const a = Number(r.querySelector('.setA').value||0);
+    const b = Number(r.querySelector('.setB').value||0);
+    totalA+=a; totalB+=b;
+    if(a>b) aW++; else if(b>a) bW++;
+  }
+  const txt = aW===bW ? (totalA===totalB ? '—' : (totalA>totalB?'Player A':'Player B')) : (aW>bW?'Player A':'Player B');
+  byId('winnerPreview').textContent = 'Winner: ' + txt;
+}
+byId('btnAddSet').onclick = ()=>{
+  const list = byId('setsList');
+  list.appendChild(setRow(list.children.length, 11, 9));
+  updateWinnerPreview();
+};
+byId('btnClearSets').onclick = ()=>{ byId('setsList').innerHTML=''; updateWinnerPreview(); };
+
+/* Populate matches table */
+function renderMatches(){
+  const body = byId('matchesBody');
+  body.innerHTML = '';
+  // ensure chronological display
+  const matches = [...state.matches].sort((a,b)=> new Date(b.date)-new Date(a.date) || (a.id<b.id?1:-1));
+  for(const m of matches){
+    const A = state.players.find(p=>p.id===m.playerA);
+    const B = state.players.find(p=>p.id===m.playerB);
+    const tr = document.createElement('tr');
+    const setTxt = m.sets.map(s=>`${s.a}-${s.b}`).join(', ');
+    const winName = (state.players.find(p=>p.id===m.winner)?.name)||'—';
+    const deltaA = Number(m.eloChangeA||0);
+    const deltaB = Number(m.eloChangeB||0);
+    tr.innerHTML = `
+      <td><span title="${m.date}">${new Date(m.date).toLocaleString()}</span></td>
+      <td>${A?.name||'?' } vs ${B?.name||'?'}</td>
+      <td>${setTxt}</td>
+      <td>${winName} <span class="badge delta anim-pop delta-badge">${deltaA>=0?'+':''}${deltaA}</span> <span class="badge delta anim-pop delta-badge">${deltaB>=0?'+':''}${deltaB}</span></td>
+      <td class="num ${deltaA>=0?'good':'bad'}">${deltaA}</td>
+      <td class="num ${deltaB>=0?'good':'bad'}">${deltaB}</td>
+      <td>${m.notes||''}</td>
+      <td>
+        <button class="btn" aria-label="Edit match" data-id="${m.id}" data-act="edit">Edit</button>
+        <button class="btn danger" aria-label="Delete match" data-id="${m.id}" data-act="del">Delete</button>
+      </td>
+    `;
+    body.appendChild(tr);
+  }
+  // actions
+  body.querySelectorAll('button').forEach(btn=>{
+    btn.onclick = ()=> {
+      const id = btn.getAttribute('data-id');
+      const act = btn.getAttribute('data-act');
+      if(act==='del'){
+        if(confirm('Delete this match? This will recompute all ELO.')){
+          const idx = state.matches.findIndex(x=>x.id===id);
+          if(idx>=0){ state.matches.splice(idx,1); recomputeAll(); renderAll(); toast('Match deleted','info'); }
+        }
+      }else if(act==='edit'){
+        loadMatchIntoForm(id);
+      }
+    };
+  });
+}
+function loadMatchIntoForm(id){
+  const m = state.matches.find(x=>x.id===id);
+  if(!m) return;
+  byId('matchDate').value = m.date.slice(0,16);
+  byId('matchNotes').value = m.notes || '';
+  byId('playerASelect').value = m.playerA;
+  byId('playerBSelect').value = m.playerB;
+  byId('setsList').innerHTML='';
+  m.sets.forEach(s=> byId('setsList').appendChild(setRow(byId('setsList').children.length, s.a, s.b)));
+  updateWinnerPreview();
+  // Replace save behavior to update this match
+  byId('btnSaveMatch').textContent = 'Update Match';
+  byId('btnSaveMatch').onclick = ()=>{
+    const ok = saveMatchCore(m.id); // keep same id
+    if(ok){ byId('btnSaveMatch').textContent = 'Save Match'; bindSaveMatchDefault(); toast('Match updated','info'); }
+  };
+}
+
+/* Save new/update existing match */
+function saveMatchCore(existingId=null){
+  const dateVal = byId('matchDate').value || new Date().toISOString().slice(0,16);
+  const A = byId('playerASelect').value;
+  const B = byId('playerBSelect').value;
+  if(!A || !B || A===B){ alert('Select two different players.'); return false; }
+  const sets = Array.from(byId('setsList').querySelectorAll('.row')).map(r=>{
+    return { a: Number(r.querySelector('.setA').value||0), b: Number(r.querySelector('.setB').value||0) };
+  });
+  if(sets.length===0){ alert('Add at least one set.'); return false; }
+
+  let aW=0,bW=0, totalA=0,totalB=0;
+  for(const s of sets){ totalA+=s.a; totalB+=s.b; if(s.a>s.b)aW++; else if(s.b>s.a)bW++; }
+  const winner = (aW===bW) ? (totalA>=totalB?A:B) : (aW>bW?A:B);
+  const loser = (winner===A?B:A);
+  const obj = {
+    id: existingId || uuid(),
+    date: new Date(dateVal).toISOString(),
+    playerA: A, playerB: B,
+    sets,
+    winner, loser,
+    totalPointsA: totalA,
+    totalPointsB: totalB,
+    pointDiffAbs: Math.abs(totalA-totalB),
+    eloChangeA: 0, eloChangeB: 0,
+    notes: byId('matchNotes').value || ''
+  };
+  if(existingId){
+    const idx = state.matches.findIndex(x=>x.id===existingId);
+    if(idx>=0) state.matches[idx] = obj;
+  }else{
+    state.matches.push(obj);
+  }
+  recomputeAll();
+  renderAll();
+  // reset form
+  byId('matchNotes').value = '';
+  byId('setsList').innerHTML = '';
+  updateWinnerPreview();
+  return true;
+}
+function bindSaveMatchDefault(){
+  byId('btnSaveMatch').onclick = ()=>{
+    if(saveMatchCore()){ toast('Match saved','info'); }
+  };
+}
+bindSaveMatchDefault();
+byId('btnRecomputeAll').onclick = ()=>{ recomputeAll(); renderAll(); toast('Recomputed from history'); };
+
+/* ===========================
+   RENDER: PLAYERS
+   =========================== */
+function renderPlayers(){
+  const body = byId('playersBody');
+  body.innerHTML = '';
+  for(const p of state.players){
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+      <td><img class="avatar" src="${p.avatar?.data || tinyAvatar('#444')}" alt="${p.name} avatar" /></td>
+      <td>${p.name}</td>
+      <td>@${p.handle||'-'}</td>
+      <td class="num">${p.elo.toFixed(1)}</td>
+      <td class="num">${p.wins}-${p.losses}</td>
+      <td class="num">${p.matches}</td>
+      <td>${p.notes||''}</td>
+      <td>
+        <button class="btn" data-id="${p.id}" data-act="edit">Edit</button>
+        <button class="btn ${p.matches>0?'':'danger'}" data-id="${p.id}" data-act="${p.matches>0?'retire':'delete'}">${p.matches>0?'Retire':'Delete'}</button>
+      </td>
+    `;
+    body.appendChild(tr);
+  }
+  body.querySelectorAll('button').forEach(btn=>{
+    btn.onclick = ()=>{
+      const id = btn.getAttribute('data-id');
+      const act = btn.getAttribute('data-act');
+      const p = state.players.find(x=>x.id===id);
+      if(!p) return;
+      if(act==='edit'){
+        const name = prompt('Name', p.name) || p.name;
+        const handle = prompt('Handle (short id)', p.handle||'') ?? p.handle;
+        const notes = prompt('Notes', p.notes||'') ?? p.notes;
+        p.name = name.slice(0, state.meta.settings.maxNameLength);
+        p.handle = handle.slice(0, state.meta.settings.maxNameLength);
+        p.notes = notes;
+        p.updatedAt = NOW_ISO();
+        saveState(); renderAll(); toast('Player updated');
+      }else if(act==='retire'){
+        if(confirm('Retire this player? They remain in history but are visually flagged as inactive.')){
+          p.notes = (p.notes? p.notes+' ' : '') + '[Retired]';
+          p.updatedAt = NOW_ISO(); saveState(); renderAll(); toast('Player retired');
+        }
+      }else if(act==='delete'){
+        if(confirm('Delete player with no matches?')){
+          const idx = state.players.findIndex(x=>x.id===id);
+          if(idx>=0){ state.players.splice(idx,1); saveState(); renderAll(); toast('Player deleted'); }
+        }
+      }
+    };
+  });
+}
+
+/* Add player */
+let newAvatarData=null, newAvatarColor="#00ffff";
+byId('newPlayerAvatar').addEventListener('change', async e=>{
+  const f = e.target.files[0]; if(!f) return;
+  const data = await imgToBase64(f);                // <-- resized to 48×48
+  newAvatarData = data;
+  newAvatarColor = await dominantColorFromDataURL(data);
+  toast('Avatar ready');
+});
+byId('btnAddPlayer').onclick = ()=>{
+  const name = byId('newPlayerName').value.trim();
+  const handle = byId('newPlayerHandle').value.trim();
+  if(!name){ alert('Name required'); return; }
+  if(state.players.some(p=>p.handle && handle && p.handle.toLowerCase()===handle.toLowerCase())){
+    alert('Handle already used'); return;
+  }
+  const p = {
+    id: uuid(), name: name.slice(0,state.meta.settings.maxNameLength),
+    handle: handle.slice(0,state.meta.settings.maxNameLength),
+    elo: state.meta.settings.baseElo,
+    wins:0, losses:0, matches:0,
+    pointsFor:0, pointsAgainst:0, pointDiff:0,
+    avatar: newAvatarData ? { type:'base64', data:newAvatarData, dominantColor:newAvatarColor } : { type:'base64', data: tinyAvatar(), dominantColor:"#00ffff" },
+    createdAt: NOW_ISO(), updatedAt: NOW_ISO(), lastMatchAt: null, notes: byId('newPlayerNotes').value || ''
+  };
+  state.players.push(p); saveState(); renderAll();
+  byId('newPlayerName').value=''; byId('newPlayerHandle').value=''; byId('newPlayerNotes').value=''; byId('newPlayerAvatar').value='';
+  newAvatarData=null; // ready for next upload
+  toast('Player added');
+};
+
+/* ===========================
+   SETTINGS
+   =========================== */
+const SETTINGS_FIELDS = [
+  ['baseElo','number'], ['kBase','number'],
+  ['kUseMarginMultiplier','checkbox'],
+  ['kMarginFn','select',['ln']], // kept for schema completeness
+  ['kMarginCap','number'],
+  ['expectedScale','number'],
+  ['minMatchesForRankingBoost','number'],
+  ['inactivityDaysForFlag','number'],
+  ['maxNameLength','number'],
+  ['pointsPerGameToWin','number']
+];
+function renderSettingsForm(){
+  const wrap = byId('settingsForm'); wrap.innerHTML='';
+  const s = state.meta.settings;
+  for(const [key,type,opts] of SETTINGS_FIELDS){
+    const id = 'set_'+key;
+    const label = document.createElement('label'); label.setAttribute('for', id); label.textContent = key;
+    const container = document.createElement('div');
+    if(type==='checkbox'){
+      container.innerHTML = `<label for="${id}">${key}</label><input id="${id}" type="checkbox" ${s[key]?'checked':''} class="input" />`;
+    }else if(type==='select'){
+      container.appendChild(label);
+      const sel = document.createElement('select'); sel.id = id; sel.className='input';
+      for(const o of (opts||[])){ const op = document.createElement('option'); op.value=o; op.textContent=o; if(s[key]===o) op.selected=true; sel.appendChild(op); }
+      container.appendChild(sel);
+    }else{
+      container.appendChild(label);
+      const inp = document.createElement('input'); inp.id=id; inp.type='number'; inp.value = s[key]; inp.className='input';
+      container.appendChild(inp);
+    }
+    wrap.appendChild(container);
+  }
+}
+byId('btnSettingsDefaults').onclick = ()=>{ state.meta.settings = { ...DEFAULT_SETTINGS }; saveState(); renderSettingsForm(); toast('Defaults restored'); };
+byId('btnSettingsSave').onclick = ()=>{
+  const s = state.meta.settings;
+  for(const [key,type] of SETTINGS_FIELDS){
+    const el = byId('set_'+key);
+    if(!el) continue;
+    if(type==='checkbox') s[key] = el.checked;
+    else if(type==='number') s[key] = Number(el.value);
+    else s[key] = el.value;
+  }
+  saveState(); recomputeAll(); renderAll(); toast('Settings saved & recomputed');
+};
+
+/* ===========================
+   EXPORT / IMPORT / ARCHIVE
+   =========================== */
+function exportJSON(){
+  const blob = new Blob([JSON.stringify(state, null, 2)], {type:'application/json'});
+  const a = document.createElement('a');
+  const y = new Date().getFullYear();
+  a.download = `pingpong-elo-${y}.json`;
+  a.href = URL.createObjectURL(blob);
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+}
+byId('btnExport').onclick = exportJSON;
+byId('btnExport2').onclick = exportJSON;
+
+let importPayload = null;
+function handleImportFile(input){
+  const file = input.files[0]; if(!file) return;
+  const reader = new FileReader();
+  reader.onload = ()=>{
+    try{
+      const obj = JSON.parse(reader.result);
+      // Validate schema minimally
+      if(!obj.meta || !obj.players || !obj.matches) throw new Error('Invalid schema');
+      importPayload = obj;
+      openImportModal();
+    }catch(e){ alert('Invalid JSON: '+e.message); importPayload=null; }
+  };
+  reader.readAsText(file);
+}
+byId('importFile').addEventListener('change', e=> handleImportFile(e.target));
+byId('importFile2').addEventListener('change', e=> handleImportFile(e.target));
+
+function openImportModal(){ byId('importModal').style.display='flex'; }
+function closeImportModal(){ byId('importModal').style.display='none'; importPayload=null; }
+byId('btnImportCancel').onclick = closeImportModal;
+byId('btnImportReplace').onclick = ()=>{
+  if(!importPayload) return;
+  state = importPayload;
+  saveState(); recomputeAll(); renderAll();
+  closeImportModal(); toast('Data replaced');
+};
+byId('btnImportMerge').onclick = ()=>{
+  if(!importPayload) return;
+  // Merge players by id or handle; append new; merge notes/avatars conservatively
+  const existingById = new Map(state.players.map(p=>[p.id,p]));
+  const existingByHandle = new Map(state.players.filter(p=>p.handle).map(p=>[p.handle.toLowerCase(),p]));
+  for(const p of importPayload.players){
+    const byId = existingById.get(p.id);
+    const byHandle = p.handle ? existingByHandle.get(p.handle.toLowerCase()) : null;
+    const target = byId || byHandle;
+    if(target){
+      // Update missing avatar/notes only
+      if((!target.avatar || !target.avatar.data) && p.avatar?.data){ target.avatar = p.avatar; }
+      if((!target.notes || target.notes==='') && p.notes){ target.notes = p.notes; }
+    }else{
+      state.players.push(p);
+    }
+  }
+  // Merge matches: dedupe by id
+  const existingMatchIds = new Set(state.matches.map(m=>m.id));
+  for(const m of importPayload.matches){
+    if(!existingMatchIds.has(m.id)) state.matches.push(m);
+  }
+  saveState(); recomputeAll(); renderAll();
+  closeImportModal(); toast('Data merged');
+};
+
+byId('btnArchiveSeason').onclick = ()=>{
+  if(!confirm('Archive current season? This will export JSON and reset ratings (keeping players).')) return;
+  exportJSON();
+  const base = state.meta.settings.baseElo;
+  state.players.forEach(p=>{
+    p.elo = base; p.wins=0; p.losses=0; p.matches=0;
+    p.pointsFor=0; p.pointsAgainst=0; p.pointDiff=0; p.lastMatchAt=null;
+  });
+  state.matches = [];
+  state.meta.season = String(Number(state.meta.season||'2025')+1);
+  saveState(); renderAll(); toast('Season archived and reset');
+};
+
+byId('btnHardReset').onclick = ()=>{
+  if(confirm('Hard reset will clear all local data. Continue?')){
+    localStorage.removeItem(LS_KEY);
+    loadState(); saveState(); recomputeAll(); renderAll();
+    toast('Storage cleared & reset');
+  }
+};
+
+/* ===========================
+   TABS & KEYBOARD
+   =========================== */
+const tabs = [
+  ['tabbtn-ladder','tab-ladder'],
+  ['tabbtn-matches','tab-matches'],
+  ['tabbtn-players','tab-players'],
+  ['tabbtn-settings','tab-settings'],
+  ['tabbtn-about','tab-about'],
+];
+function activateTab(idx){
+  tabs.forEach(([btnId,panelId],i)=>{
+    const btn = byId(btnId), panel = byId(panelId);
+    const sel = i===idx;
+    btn.setAttribute('aria-selected', sel?'true':'false');
+    panel.classList.toggle('active', sel);
+  });
+}
+tabs.forEach(([btnId],i)=> byId(btnId).onclick = ()=> activateTab(i));
+window.addEventListener('keydown', (e)=>{
+  const keyToIdx = { '1':0,'2':1,'3':2,'4':3,'5':4 };
+  if(keyToIdx[e.key]!=null){ activateTab(keyToIdx[e.key]); }
+});
+
+/* ===========================
+   INITIALIZE & RENDER ALL
+   =========================== */
+function renderAll(){
+  byId('seasonLabel').textContent = state.meta.season || '2025';
+  renderLadder();
+  refreshPlayerSelects();
+  renderMatches();
+  renderPlayers();
+  renderSettingsForm();
+}
+byId('btnRefreshLadder').onclick = ()=>{ renderLadder(); toast('Ladder refreshed'); };
+
+/* On load: seed if missing, recompute once, default set rows */
+(function init(){
+  loadState();
+  recomputeAll();
+  renderAll();
+  // Pre-add two set rows for convenience
+  byId('setsList').appendChild(setRow(0, 11, 8));
+  byId('setsList').appendChild(setRow(1, 9, 11));
+  updateWinnerPreview();
+})();
+</script>
+</body>
+</html>
