@@ -1302,5 +1302,70 @@ byId('btnRefreshLadder').onclick = ()=>{ renderLadder(); toast('Ladder refreshed
   updateWinnerPreview();
 })();
 </script>
+
+<script>
+/* --- Live Snapshot support: load ladder.json for read-only viewing --- */
+let READ_ONLY_MODE = false;
+
+function setReadOnlyUI(on){
+  READ_ONLY_MODE = !!on;
+  const disallow = [
+    '#btnSaveMatch','#btnRecomputeAll','#btnAddSet','#btnClearSets',
+    '#btnAddPlayer','#btnSettingsSave','#btnSettingsDefaults',
+    '#btnExport','#btnExport2','#importFile','#importFile2',
+    '#btnArchiveSeason','#btnHardReset'
+  ];
+  disallow.forEach(sel=>{
+    const el = document.querySelector(sel);
+    if(el){ el.disabled = on; el.setAttribute('aria-disabled', String(on)); }
+  });
+
+  // Hide edit buttons when in live mode
+  if(on){
+    document.querySelectorAll('#matchesBody button, #playersBody button').forEach(b=> b.style.display='none');
+    if(!document.getElementById('liveBanner')){
+      const banner = document.createElement('div');
+      banner.id = 'liveBanner';
+      banner.className = 'badge warn anim-blink-slow';
+      banner.style.margin = '8px 0';
+      banner.textContent = 'LIVE SNAPSHOT (read-only)';
+      document.querySelector('.header')?.appendChild(banner);
+    }
+  }else{
+    document.getElementById('liveBanner')?.remove();
+    document.querySelectorAll('#matchesBody button, #playersBody button').forEach(b=> b.style.display='');
+  }
+}
+
+async function loadLiveSnapshot(url='ladder.json'){
+  try{
+    const res = await fetch(url + '?v=' + Date.now(), { cache: 'no-store' });
+    if(!res.ok) throw new Error('HTTP '+res.status);
+    const obj = await res.json();
+    if(!obj?.meta || !Array.isArray(obj.players) || !Array.isArray(obj.matches)) throw new Error('Invalid schema');
+
+    // Replace current app state with snapshot
+    state = obj;
+    recomputeAll();
+    renderAll();
+    setReadOnlyUI(true);
+    toast('Loaded live ladder snapshot');
+  }catch(e){
+    console.warn('Live snapshot load failed:', e);
+    toast('No live snapshot found — showing your local version');
+  }
+}
+
+(function maybeLoadLive(){
+  const qs = location.search.toLowerCase();
+  const hash = location.hash.toLowerCase();
+  const wantLive = qs.includes('live') || hash.includes('live');
+  if(wantLive){
+    window.addEventListener('load', ()=> setTimeout(()=> loadLiveSnapshot(), 100));
+  }
+})();
+</script>
+ 
 </body>
 </html>
+
