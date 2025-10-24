@@ -9,11 +9,7 @@
 <style>
 /* ---------------------------
    INLINE PIXEL FONT (WOFF2)
-   ---------------------------
-   Note: This is a tiny, permissively licensed pixel font embedded as a WOFF2.
-   It covers basic ASCII used in the app UI. If the font fails to load, we fall
-   back to system monospace (still pixel-esque with the CSS treatment).
-*/
+   --------------------------- */
 @font-face{
   font-family:"ArcadePix";
   src:url(data:font/woff2;base64,d09GMgABAAAAAAs4ABAAAAAAEPgAAAPkAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAP0ZGVE0AAAHUAAAAVAAAAGh0jvO3R0RFRgAAAeAAAABwAAAAiO7T3x1HU1VCAAAB/AAAABsAAABQF3i6pE9TLzIAAAg0AAAAPQAAAGC2iF2xY21hcAAAChwAAABiAAABwO3+gV5oZnBnbQAALJgAAABNAAABwSuoWf5nYXNwAAAuBAAAAAgAAAAIAAAACGhlYWQAADEkAAAAMwAAADnV+2PFaGhlYQAAMmAAAAAgAAAAJHV8kZ5obXR4AAA0uAAAAEAAAAA6J3r0p2xvY2EAAAD8AAAALwAAADm1E5uUbG1heAAABGgAAAAfAAAAMQK8fUhuYW1lAAAEqAAAABkAAABwQXJjYWRlUGl4cG9zdAAABSQAAAAcAAAAJ7L8Z1pwcmVwAAAFdAAAABcAAAB1fQj5GgAAAAEAAAABAAAAAQAAAwAAAAEAAAABAAAAAQAAAAAAAAABAAAAYAAAAGAAAAABAAAAXQAAAH4AAAACAAAAAQAAAACCAAAAhgAAAAgAAAAAAAABAAAACgAAAAoAAAAGAAAABwAAAAEAAAAHAAAAAQAAAF8AAAABAAAAAQAAAAEAAABQAAAAAQAAAAEAAABiAAAAAQAAAACAAAAAQAAAACcAAAAAQAAAADQAAABAAAAAA==) format("woff2");
@@ -28,8 +24,8 @@ img{max-width:100%;display:block}
 
 /* ------------- THEME ------------- */
 :root{
-  --bg:#0b0e16;             /* dark charcoal */
-  --bg-2:#0f1424;           /* panel darker */
+  --bg:#0b0e16;
+  --bg-2:#0f1424;
   --grid:#101a2e;
   --cyan:#00FFFF;
   --mag:#FF00FF;
@@ -43,7 +39,7 @@ img{max-width:100%;display:block}
   --shadow:0 0 12px rgba(0,255,255,.35), 0 0 28px rgba(255,0,255,.25);
   --border:2px solid rgba(0,255,255,.35);
   --border-px:2px;
-  --radius:10px; /* softened square, still retro */
+  --radius:10px;
   --scanline-alpha:.07;
   --scanline-size:2px;
   --prefix: "pongElo_2025_";
@@ -214,7 +210,6 @@ label{font-size:12px; color:var(--muted); display:block; margin-bottom:4px}
 [tabindex]:focus-visible, a:focus-visible{outline:2px dashed var(--focus); outline-offset:2px}
 
 /* ----------- ANIMATIONS ----------- */
-/* Ladder breathing */
 @keyframes breathe{
   0%{transform:scale(1); opacity:1}
   50%{transform:scale(1.01); opacity:.98}
@@ -222,18 +217,15 @@ label{font-size:12px; color:var(--muted); display:block; margin-bottom:4px}
 }
 .anim-breathe{animation:breathe 5s ease-in-out infinite}
 
-/* Neon title flicker */
 @keyframes neon{
   0%, 18%, 22%, 25%, 53%, 57%, 100% { text-shadow: 0 0 6px #0ff, 0 0 18px #0ff, 0 0 30px #f0f; }
   20%, 24%, 55% { text-shadow: 0 0 2px #0ff, 0 0 6px #f0f; opacity:.85;}
 }
 .anim-neon{animation:neon 4s infinite}
 
-/* Pop (for delta badges & toasts) */
 @keyframes pop{0%{transform:scale(.8); opacity:0} 60%{transform:scale(1.06)} 100%{transform:scale(1); opacity:1}}
 .anim-pop{animation:pop .32s cubic-bezier(.2,.9,.2,1)}
 
-/* PulseGlow for updated rows */
 @keyframes pulseGlow{
   0%{box-shadow:0 0 0 0 rgba(0,255,255,.0)}
   50%{box-shadow:0 0 22px 2px rgba(0,255,255,.35)}
@@ -241,17 +233,14 @@ label{font-size:12px; color:var(--muted); display:block; margin-bottom:4px}
 }
 .anim-pulse{animation:pulseGlow 2.2s ease-out 1}
 
-/* Slide-in on reorder */
 @keyframes slideIn{
   from{transform:translateY(6px); opacity:.0}
   to{transform:translateY(0); opacity:1}
 }
 .anim-slide-in{animation:slideIn .3s ease-out}
 
-/* CRT hover warp */
 .hover-crt:hover{filter:saturate(1.2) contrast(1.05)}
 
-/* Slow blink for provisional/inactive */
 @keyframes blinkSlow{50%{opacity:.35}}
 .anim-blink-slow{animation:blinkSlow 1.8s infinite}
 
@@ -456,7 +445,6 @@ label{font-size:12px; color:var(--muted); display:block; margin-bottom:4px}
     <h3 class="anim-neon">About</h3>
     <p>This single-file web app implements a complete offline Ping-Pong ELO ladder with match history, pixel avatars, JSON import/export, and local persistence (<code>localStorage</code>). Drop <code>index.html</code> into a GitHub Pages repo and it just works.</p>
     <ul>
-      <li>Keyboard: <span class="badge">1</span>/<span class="badge">2</span>/<span class="badge">3</span>/<span class="badge">4</span>/<span class="badge">5</span> to switch tabs; <span class="badge">/</span> to focus search (where available).</li>
       <li>Accessibility: Visible focus states, reduced motion respected, semantic tables & labels.</li>
       <li>Data Key Prefix: <code>pongElo_2025_</code></li>
       <li>ELO: <span class="hint" title="Rnew = Rold + Keff*(S-E) where E = 1/(1+10^((Ropp-R)/expectedScale))">full logistic model</span> with optional margin multiplier.</li>
@@ -527,7 +515,7 @@ function tinyAvatar(color="#00ffff"){
   return c.toDataURL("image/png");
 }
 
-/* Seed dataset (5–10 fictional players with sample matches) */
+/* Seed dataset */
 function seedData(){
   const created = NOW_ISO();
   const p = (name, handle, color) => ({
@@ -579,7 +567,7 @@ function loadState(){
   else{
     try{ state = JSON.parse(raw); }catch(e){ console.warn(e); state = seedData(); saveState(); }
   }
-  // Ensure schema fields exist (forward compatibility)
+  // Ensure schema fields exist
   state.meta = state.meta || DEFAULT_META();
   state.meta.settings = { ...DEFAULT_SETTINGS, ...(state.meta.settings||{}) };
 }
@@ -593,7 +581,7 @@ function daysAgo(iso){
   return diff === 0 ? 'today' : `${diff}d`;
 }
 
-/* === FIX: Always downscale avatars to crisp 48×48 PNG before saving === */
+/* Avatar processing */
 function imgToBase64(file){
   return new Promise((resolve,reject)=>{
     const reader = new FileReader();
@@ -601,11 +589,10 @@ function imgToBase64(file){
       try{
         const img = new Image();
         img.onload = ()=>{
-          const size = 48; // target pixel avatar size
+          const size = 48;
           const c = document.createElement('canvas'); c.width = size; c.height = size;
           const ctx = c.getContext('2d');
-          ctx.imageSmoothingEnabled = false; // keep it pixel-crisp
-          // Fit image inside 48×48, centered, nearest-neighbor style
+          ctx.imageSmoothingEnabled = false;
           const ratio = Math.min(size / img.width, size / img.height);
           const w = Math.max(1, Math.round(img.width * ratio));
           const h = Math.max(1, Math.round(img.height * ratio));
@@ -613,7 +600,7 @@ function imgToBase64(file){
           const y = Math.floor((size - h) / 2);
           ctx.fillStyle = '#000'; ctx.fillRect(0,0,size,size);
           ctx.drawImage(img, 0, 0, img.width, img.height, x, y, w, h);
-          resolve(c.toDataURL('image/png')); // compact PNG data URL
+          resolve(c.toDataURL('image/png'));
         };
         img.onerror = reject;
         img.src = reader.result;
@@ -667,7 +654,7 @@ function applyMatchElo(pA, pB, winnerId, totalA, totalB, settings){
   return { deltaA, deltaB };
 }
 
-/* Recompute entire history chronologically and rebuild all tallies */
+/* Recompute entire history chronologically */
 function recomputeAll(){
   const settings = state.meta.settings;
   // Reset players
@@ -677,18 +664,17 @@ function recomputeAll(){
     p.pointsFor = p.pointsAgainst = p.pointDiff = 0;
     p.lastMatchAt = null;
   }
-  // Sort matches by date then id for deterministic order
+  // Sort matches by date then id
   state.matches.sort((a,b)=>{
     const da = new Date(a.date) - new Date(b.date);
     if(da !== 0) return da;
     return (a.id < b.id) ? -1 : (a.id > b.id ? 1 : 0);
   });
-  // Apply one by one
+  // Apply matches
   for(const m of state.matches){
     const A = state.players.find(p=>p.id===m.playerA);
     const B = state.players.find(p=>p.id===m.playerB);
-    if(!A || !B) continue; // safety
-    // Compute totals if not stored
+    if(!A || !B) continue;
     const totalA = m.sets.reduce((s,x)=>s+Number(x.a||0),0);
     const totalB = m.sets.reduce((s,x)=>s+Number(x.b||0),0);
     const winnerId = (m.winner && (m.winner===A.id || m.winner===B.id))
@@ -704,7 +690,6 @@ function recomputeAll(){
     m.eloChangeA = +deltaA.toFixed(2);
     m.eloChangeB = +deltaB.toFixed(2);
 
-    // Tallies
     A.matches++; B.matches++;
     A.pointsFor += totalA; A.pointsAgainst += totalB; A.pointDiff = A.pointsFor - A.pointsAgainst;
     B.pointsFor += totalB; B.pointsAgainst += totalA; B.pointDiff = B.pointsFor - B.pointsAgainst;
@@ -715,7 +700,7 @@ function recomputeAll(){
   saveState();
 }
 
-/* Head-to-head helper (returns positive if A ahead) */
+/* Head-to-head helper */
 function headToHeadAdv(aId,bId){
   let aW=0,bW=0;
   for(const m of state.matches){
@@ -727,7 +712,7 @@ function headToHeadAdv(aId,bId){
   return aW - bW;
 }
 
-/* Ranking comparator per spec */
+/* Ranking comparator */
 function rankPlayers(){
   const s = state.meta.settings;
   const arr = [...state.players];
@@ -736,9 +721,8 @@ function rankPlayers(){
     if(B.elo !== A.elo) return B.elo - A.elo;
     if(B.matches !== A.matches) return B.matches - A.matches;
     const diff = B.pointDiff - A.pointDiff; if(diff !== 0) return diff;
-    // head-to-head if only these two tied and they have played
     const h2h = headToHeadAdv(A.id, B.id);
-    if(h2h !== 0) return h2h>0 ? -1 : 1; // more wins ranks higher
+    if(h2h !== 0) return h2h>0 ? -1 : 1;
     if(B.wins !== A.wins) return B.wins - A.wins;
     const wrA = A.matches? A.wins/A.matches : 0;
     const wrB = B.matches? B.wins/B.matches : 0;
@@ -838,7 +822,6 @@ function drawMiniChart(canvas, playerId){
   const ctx = canvas.getContext('2d');
   const history = [];
   let elo = state.meta.settings.baseElo;
-  // Walk chronological matches and push ELO after matches for this player
   for(const m of state.matches){
     const involved = (m.playerA===playerId || m.playerB===playerId);
     if(involved){
@@ -847,7 +830,6 @@ function drawMiniChart(canvas, playerId){
       history.push({ t: new Date(m.date).getTime(), elo });
     }
   }
-  // Draw
   const w = canvas.width = canvas.clientWidth;
   const h = canvas.height = canvas.clientHeight;
   ctx.clearRect(0,0,w,h);
@@ -871,7 +853,6 @@ function drawMiniChart(canvas, playerId){
   for(const d of history) ctx.lineTo(x(d.t), y(d.elo));
   ctx.stroke();
 
-  // draw points
   ctx.fillStyle = '#ff00ff';
   for(const d of history) ctx.fillRect(x(d.t)-1.5, y(d.elo)-1.5, 3,3);
 }
@@ -923,7 +904,6 @@ byId('btnClearSets').onclick = ()=>{ byId('setsList').innerHTML=''; updateWinner
 function renderMatches(){
   const body = byId('matchesBody');
   body.innerHTML = '';
-  // ensure chronological display
   const matches = [...state.matches].sort((a,b)=> new Date(b.date)-new Date(a.date) || (a.id<b.id?1:-1));
   for(const m of matches){
     const A = state.players.find(p=>p.id===m.playerA);
@@ -948,9 +928,8 @@ function renderMatches(){
     `;
     body.appendChild(tr);
   }
-  // actions
   body.querySelectorAll('button').forEach(btn=>{
-    btn.onclick = ()=> {
+    btn.onclick = ()=>{
       const id = btn.getAttribute('data-id');
       const act = btn.getAttribute('data-act');
       if(act==='del'){
@@ -974,10 +953,9 @@ function loadMatchIntoForm(id){
   byId('setsList').innerHTML='';
   m.sets.forEach(s=> byId('setsList').appendChild(setRow(byId('setsList').children.length, s.a, s.b)));
   updateWinnerPreview();
-  // Replace save behavior to update this match
   byId('btnSaveMatch').textContent = 'Update Match';
   byId('btnSaveMatch').onclick = ()=>{
-    const ok = saveMatchCore(m.id); // keep same id
+    const ok = saveMatchCore(m.id);
     if(ok){ byId('btnSaveMatch').textContent = 'Save Match'; bindSaveMatchDefault(); toast('Match updated','info'); }
   };
 }
@@ -1017,7 +995,6 @@ function saveMatchCore(existingId=null){
   }
   recomputeAll();
   renderAll();
-  // reset form
   byId('matchNotes').value = '';
   byId('setsList').innerHTML = '';
   updateWinnerPreview();
@@ -1088,7 +1065,7 @@ function renderPlayers(){
 let newAvatarData=null, newAvatarColor="#00ffff";
 byId('newPlayerAvatar').addEventListener('change', async e=>{
   const f = e.target.files[0]; if(!f) return;
-  const data = await imgToBase64(f);                // <-- resized to 48×48
+  const data = await imgToBase64(f);
   newAvatarData = data;
   newAvatarColor = await dominantColorFromDataURL(data);
   toast('Avatar ready');
@@ -1111,7 +1088,7 @@ byId('btnAddPlayer').onclick = ()=>{
   };
   state.players.push(p); saveState(); renderAll();
   byId('newPlayerName').value=''; byId('newPlayerHandle').value=''; byId('newPlayerNotes').value=''; byId('newPlayerAvatar').value='';
-  newAvatarData=null; // ready for next upload
+  newAvatarData=null;
   toast('Player added');
 };
 
@@ -1121,7 +1098,7 @@ byId('btnAddPlayer').onclick = ()=>{
 const SETTINGS_FIELDS = [
   ['baseElo','number'], ['kBase','number'],
   ['kUseMarginMultiplier','checkbox'],
-  ['kMarginFn','select',['ln']], // kept for schema completeness
+  ['kMarginFn','select',['ln']],
   ['kMarginCap','number'],
   ['expectedScale','number'],
   ['minMatchesForRankingBoost','number'],
@@ -1187,7 +1164,6 @@ function handleImportFile(input){
   reader.onload = ()=>{
     try{
       const obj = JSON.parse(reader.result);
-      // Validate schema minimally
       if(!obj.meta || !obj.players || !obj.matches) throw new Error('Invalid schema');
       importPayload = obj;
       openImportModal();
@@ -1209,7 +1185,6 @@ byId('btnImportReplace').onclick = ()=>{
 };
 byId('btnImportMerge').onclick = ()=>{
   if(!importPayload) return;
-  // Merge players by id or handle; append new; merge notes/avatars conservatively
   const existingById = new Map(state.players.map(p=>[p.id,p]));
   const existingByHandle = new Map(state.players.filter(p=>p.handle).map(p=>[p.handle.toLowerCase(),p]));
   for(const p of importPayload.players){
@@ -1217,14 +1192,12 @@ byId('btnImportMerge').onclick = ()=>{
     const byHandle = p.handle ? existingByHandle.get(p.handle.toLowerCase()) : null;
     const target = byId || byHandle;
     if(target){
-      // Update missing avatar/notes only
       if((!target.avatar || !target.avatar.data) && p.avatar?.data){ target.avatar = p.avatar; }
       if((!target.notes || target.notes==='') && p.notes){ target.notes = p.notes; }
     }else{
       state.players.push(p);
     }
   }
-  // Merge matches: dedupe by id
   const existingMatchIds = new Set(state.matches.map(m=>m.id));
   for(const m of importPayload.matches){
     if(!existingMatchIds.has(m.id)) state.matches.push(m);
@@ -1255,7 +1228,7 @@ byId('btnHardReset').onclick = ()=>{
 };
 
 /* ===========================
-   TABS & KEYBOARD
+   TABS (click only)
    =========================== */
 const tabs = [
   ['tabbtn-ladder','tab-ladder'],
@@ -1273,10 +1246,6 @@ function activateTab(idx){
   });
 }
 tabs.forEach(([btnId],i)=> byId(btnId).onclick = ()=> activateTab(i));
-window.addEventListener('keydown', (e)=>{
-  const keyToIdx = { '1':0,'2':1,'3':2,'4':3,'5':4 };
-  if(keyToIdx[e.key]!=null){ activateTab(keyToIdx[e.key]); }
-});
 
 /* ===========================
    INITIALIZE & RENDER ALL
@@ -1291,12 +1260,11 @@ function renderAll(){
 }
 byId('btnRefreshLadder').onclick = ()=>{ renderLadder(); toast('Ladder refreshed'); };
 
-/* On load: seed if missing, recompute once, default set rows */
+/* On load */
 (function init(){
   loadState();
   recomputeAll();
   renderAll();
-  // Pre-add two set rows for convenience
   byId('setsList').appendChild(setRow(0, 11, 8));
   byId('setsList').appendChild(setRow(1, 9, 11));
   updateWinnerPreview();
@@ -1344,7 +1312,6 @@ async function loadLiveSnapshot(url='ladder.json'){
     const obj = await res.json();
     if(!obj?.meta || !Array.isArray(obj.players) || !Array.isArray(obj.matches)) throw new Error('Invalid schema');
 
-    // Replace current app state with snapshot
     state = obj;
     recomputeAll();
     renderAll();
@@ -1365,7 +1332,6 @@ async function loadLiveSnapshot(url='ladder.json'){
   }
 })();
 </script>
- 
+
 </body>
 </html>
-
