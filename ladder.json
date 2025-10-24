@@ -1,0 +1,1032 @@
+{
+  "meta": {
+    "season": "2025",
+    "createdAt": "2025-10-17T14:14:06.786Z",
+    "lastUpdatedAt": "2025-10-24T13:37:42.579Z",
+    "settings": {
+      "baseElo": 1000,
+      "kBase": 32,
+      "kUseMarginMultiplier": true,
+      "kMarginFn": "ln",
+      "kMarginCap": 3,
+      "expectedScale": 400,
+      "minMatchesForRankingBoost": 10,
+      "inactivityDaysForFlag": 40,
+      "maxNameLength": 30,
+      "pointsPerGameToWin": 11
+    }
+  },
+  "players": [
+    {
+      "id": "f25501a5-f72a-43a5-8fa0-623e1a492734",
+      "name": "Michael",
+      "handle": "MCbrallo",
+      "elo": 952.2913473184972,
+      "wins": 11,
+      "losses": 10,
+      "matches": 21,
+      "pointsFor": 260,
+      "pointsAgainst": 243,
+      "pointDiff": 17,
+      "avatar": {
+        "type": "base64",
+        "data": "data:image/png;base64,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",
+        "dominantColor": "#7a9097"
+      },
+      "createdAt": "2025-10-17T13:56:24.582Z",
+      "updatedAt": "2025-10-24T13:37:42.579Z",
+      "lastMatchAt": "2025-10-25T08:00:00.000Z",
+      "notes": ""
+    },
+    {
+      "id": "68b97367-6dcd-4259-b225-a1dc90fff8be",
+      "name": "Darius",
+      "handle": "AfroGuy",
+      "elo": 973.518959142203,
+      "wins": 0,
+      "losses": 1,
+      "matches": 1,
+      "pointsFor": 10,
+      "pointsAgainst": 12,
+      "pointDiff": -2,
+      "avatar": {
+        "type": "base64",
+        "data": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAABtklEQVR4AeyVMU7DUAyGn3INNujOAhNFPQFscAU2WJgZuEGvARusLFG7lYW9sCFxC+CzZMmEl1ApjYOlJ/Wv/9hOnu3faauU0mdk0MB3/XE/pYGxtSsKFAV6TqCsUM8B9r69KNB7hD0fUE2PLtO28LB7kLwhK7RYzlvnYGOW2xva/DZnKC4NHE+v5Pmz2b5Y+6UxfPCunJPXVfKGNEBxoK5fMFlMJjvi78qRBOcvaaBrBTS2Xr8n5c0a1f+4d5i8IQ2wGhR1d3+D+QGN4YT/lUOeJ6QBneD52e2vszVGAN6V473/nCcNMFktEAsoFksMDpTjB/iw+LHe68N50gCHAy0kxzWmtpnD9RiQBnSSuQJszHKbq34k9YY0oFPVQihOOTH4YjlPyokD/Fj82DEgDejBtpAm12u13GM516uL6+QNaUAnSRFN2JjlNk/9H0918oY00JykLc7GLG/LsX4PXjG9bcH7BeY8UcBjUkOdUfFnEBnxFWCPIqOs0FAv56bPrSKvD7XHf4kj/4RSe3wFTt+eU2TEV2DTn6v/mlcUGFuZokBWAUdnUcBx2NmjigLZsTg6wyvwBQAA///+Bc7EAAAABklEQVQDAPNcO21IpvcuAAAAAElFTkSuQmCC",
+        "dominantColor": "#5f3d47"
+      },
+      "createdAt": "2025-10-17T13:56:33.689Z",
+      "updatedAt": "2025-10-24T13:37:42.579Z",
+      "lastMatchAt": "2025-10-22T19:07:00.000Z",
+      "notes": ""
+    },
+    {
+      "id": "34cc4212-a0eb-4f1c-949b-538638867679",
+      "name": "Kenneth",
+      "handle": "Ken",
+      "elo": 982.8245452948385,
+      "wins": 5,
+      "losses": 6,
+      "matches": 11,
+      "pointsFor": 187,
+      "pointsAgainst": 189,
+      "pointDiff": -2,
+      "avatar": {
+        "type": "base64",
+        "data": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAABtklEQVR4AeyVMU7DUAyGn3INNujOAhNFPQFscAU2WJgZuEGvARusLFG7lYW9sCFxC+CzZMmEl1ApjYOlJ/Wv/9hOnu3faauU0mdk0MB3/XE/pYGxtSsKFAV6TqCsUM8B9r69KNB7hD0fUE2PLtO28LB7kLwhK7RYzlvnYGOW2xva/DZnKC4NHE+v5Pmz2b5Y+6UxfPCunJPXVfKGNEBxoK5fMFlMJjvi78qRBOcvaaBrBTS2Xr8n5c0a1f+4d5i8IQ2wGhR1d3+D+QGN4YT/lUOeJ6QBneD52e2vszVGAN6V473/nCcNMFktEAsoFksMDpTjB/iw+LHe68N50gCHAy0kxzWmtpnD9RiQBnSSuQJszHKbq34k9YY0oFPVQihOOTH4YjlPyokD/Fj82DEgDejBtpAm12u13GM516uL6+QNaUAnSRFN2JjlNk/9H0918oY00JykLc7GLG/LsX4PXjG9bcH7BeY8UcBjUkOdUfFnEBnxFWCPIqOs0FAv56bPrSKvD7XHf4kj/4RSe3wFTt+eU2TEV2DTn6v/mlcUGFuZokBWAUdnUcBx2NmjigLZsTg6wyvwBQAA///+Bc7EAAAABklEQVQDAPNcO21IpvcuAAAAAElFTkSuQmCC",
+        "dominantColor": "#5f3d47"
+      },
+      "createdAt": "2025-10-17T13:57:03.853Z",
+      "updatedAt": "2025-10-24T13:37:42.579Z",
+      "lastMatchAt": "2025-10-25T08:00:00.000Z",
+      "notes": ""
+    },
+    {
+      "id": "b0f0196a-bcea-4d48-8463-e805fbbdcb6d",
+      "name": "Luis",
+      "handle": "Luishhh",
+      "elo": 1219.9051733618314,
+      "wins": 8,
+      "losses": 2,
+      "matches": 10,
+      "pointsFor": 122,
+      "pointsAgainst": 104,
+      "pointDiff": 18,
+      "avatar": {
+        "type": "base64",
+        "data": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAEUklEQVR4AeyYfUxVdRjHP7/juXB5uxbjxUU4UozsBWTFlD/KNnthrtYUbODG2iKiElBCw82yWqu0VqvIFEuzbNSIXlb+4ahWmSvnKtOZFqTMICNqMHm73Ldzeo7gf25y4MDd3e7Z89x7dn6/3/N8v8/z/F7O0QAzktUiIPgjV6IEwp27aAaiGZhiBCK/hFSVgkoJgwMaEjMzqUHxN5YB4YAD6oAJWzAs8JYKj8iVKIFw5y6agWgGphiBSZdQgiz4p1/YiNmUSXMuNHigXd4slFGICsCrz4G1Tk8R3yWHT4qA2x9P3/Y0yiu3oB7oYvUx6I+/lmSvvB1pP2C6oGYTuMw02j36JUFMpYNmd7AKXYb3bT/+z7/k4Mq3GCxqZeCOVp4s2Ex8y1GCH+/Ht+8LjE+OwkdtZJ/L5Lcsu14m3t82geDWEd7fDUPFuXxfs4WEVSUklpTQW1pKx9I89JVFxN51O8cLltNWX8eO5ztZ2J6AnzkTR2Wjp20Cb0j0y+4PMkucXPNUCqPyH0TDuC2FeY9lE5DDgKVsiiH91l9Y9UgKuAJ82NwjPZ0XbeImx3quWQfPbIBULZHLqw/hNkyp9RD5n54l1NJBjGkQEzBYtKeT3Hf7eSXvP4bjTVaX6ahZCWNGHPy1RUA3NNxV4E6GkDnEnnRBYoiKGLhYmPOe3I2JigElp7tbRBNGdXa+FMRrDOP0ZYsAGJzZBo37oCtDiOwA5ZOCWdAoRQTL7kti3WtHhN0ATZ+lUrcYijqvhICXwrshLtWN05ctAiHlIn3WArpugJTuLEpXgOl2gW7IJIXNtfewvjYfM9bDg0X/8vIhafec5XBmouBehLfXmjFy66BodmyZskPFrvmDv17UORn/9/mhyjeCeXItsfxJjtuLxBuFbAjSOixl1PpBGiPzNQ7/dII4TZenzootApbrgOYhY6OLeUOjDLp1euMTICiRNucy+2apKdmNq68rYkDWqUR/HCuKelh60EdlWQjDkI6WEQfVNoEzjy4msM3L7scVfXqQ776CHtdNcnwwOfd1Hb92/0h2xQFmd9zL/m8z0SzMhszkgVzJjIPIx03ZJjA3I4AuK07ts5nklcLyZZDkOiJ1r2HGKa7OKmBtvQdfdjN732yn5R1QSiZvyjGm49LsGlUNB2RIDO6KLvTfwT2YA/7Q+S/EIWlx9fXSuGuAUMBN4TdwZ/n1nJ7jxwxYrdLBYdFs2xMg6qFhzF2xnGhbgl5/iiT5suH3z6d4icyF5DRqKuB4TIDqdtCuOMVV/4zYdjPRAfYJWJZloqoqHxte7yO0PcjPVfJw1EexlNTWp0GZihvNWCkp8PR7mc5rcgTGEe3taEc9DPlNELe+m3I5ZjQ8IVlQJpqaXuDjEJgSgQtGwvkfJRDO6Fu+oxmwohBOjWYgnNG3fGtmk+xKO+XWAbXSGQ4V9JErVsCcRz+DFqMEZjDYF3UVzcBFwzKDDyM+A/8DAAD//zjZboQAAAAGSURBVAMATuKXQC8THeMAAAAASUVORK5CYII=",
+        "dominantColor": "#6d2306"
+      },
+      "createdAt": "2025-10-17T13:57:45.907Z",
+      "updatedAt": "2025-10-24T13:37:42.579Z",
+      "lastMatchAt": "2025-10-24T07:57:00.000Z",
+      "notes": ""
+    },
+    {
+      "id": "a786db3a-bb10-4618-8aa9-bec755384f9f",
+      "name": "Colin",
+      "handle": "TaxEvader",
+      "elo": 954.473749204939,
+      "wins": 2,
+      "losses": 3,
+      "matches": 5,
+      "pointsFor": 58,
+      "pointsAgainst": 60,
+      "pointDiff": -2,
+      "avatar": {
+        "type": "base64",
+        "data": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAABnUlEQVR4AexZwU7CQBB9uxTEECXi0ZN6NJ74A0/+s/ETOHLUszEGjEiiNe06SyXUQ9t02GlpMs0OlO7sm3nvEdpSC8B1OTwB6r+7Qwm07Z060LoDKXXQ5dCvEBnY6lAHWpWfios44AwhO7pC+Yt4taQDMkOEgKHePYdtRHFfpntCFSFAuI0NJdCY1AWF1IECYRo7rA40JnVBIZYD7+4Lzn2URr6eHY9Kcz1WPr/Ofg0CO9gxIliclMYuGzA9lOZ6LDA3FgHnLxGYBUMvYxEI3cQ+eEwC/h5un7Lh1rIIWHsEZ0xp5FtMFuvSXI+Vz6+zzyJQp4B0rhKQVrgKXx2oUkh6Xh2QVrgKX8QBZ/4/NQHkTnwiBPy/EqAT3Tbs+WmVkOx5EQLsbhgLlQBDtKBL1IGgcjLADt8B+kn+jgBzP8XD9QTm4hKf0xu8DXpY3l7RrSoOe4utRXpskD7OcPe0AF5eMZjNcRYnmMyfQdPYsPBWBAvSJBTWMEkxWjn0foA+4ZpkjSG9b/bTrHf62N1hu9t61rkSyHRo77XzDvwCAAD//2nOUokAAAAGSURBVAMAGnHYMcTKkd8AAAAASUVORK5CYII=",
+        "dominantColor": "#be1413"
+      },
+      "createdAt": "2025-10-17T13:59:17.123Z",
+      "updatedAt": "2025-10-24T13:37:42.579Z",
+      "lastMatchAt": "2025-10-25T07:58:00.000Z",
+      "notes": ""
+    },
+    {
+      "id": "0bd3fdc7-d07f-4c35-8e7e-b98b27af4991",
+      "name": "Benedek",
+      "handle": "Ben",
+      "elo": 1060.677707472421,
+      "wins": 6,
+      "losses": 6,
+      "matches": 12,
+      "pointsFor": 184,
+      "pointsAgainst": 196,
+      "pointDiff": -12,
+      "avatar": {
+        "type": "base64",
+        "data": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAAsUlEQVR4AeySuw3CQBAFV9cBHRARUwEN0C8lEBJSAAXQgj/5BZZGuvOTRvImJ7+1b+a1qlqSZ7/A9v+5jxeY7U4DGoAE8iv0udwqefINwApOj2tgtgINaAASsEIQII7nG7j/v5U8+QaOl/Ccb2pgthcNaAASsEIQII636+tRyWOFcAfgAg1AgDiuAYwQLtAABIjjGsAI4YL2e74reaxQtwEDDzUwEHb3UxroYhl4GG9gBQAA//+feNlEAAAABklEQVQDAHxFUEAtvSelAAAAAElFTkSuQmCC",
+        "dominantColor": "#6b634b"
+      },
+      "createdAt": "2025-10-17T14:00:18.531Z",
+      "updatedAt": "2025-10-24T13:37:42.579Z",
+      "lastMatchAt": "2025-10-25T07:57:00.000Z",
+      "notes": ""
+    },
+    {
+      "id": "ab2998ee-a291-4a17-8270-4254e2b24305",
+      "name": "Vinay",
+      "handle": "TheCEO",
+      "elo": 961.073960650903,
+      "wins": 2,
+      "losses": 3,
+      "matches": 5,
+      "pointsFor": 53,
+      "pointsAgainst": 59,
+      "pointDiff": -6,
+      "avatar": {
+        "type": "base64",
+        "data": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAADMklEQVR4AeyZy27TQBSG/5k4SW+wS6mqCoFogWX7AJQ9bJBQhUpfgQU7bhKXt+AZqErFtZsikJAQbcOTdEkDpTfz/5OMMJEj5eLETuXKv8+ZMx7nO+eMY1WxAMJhlhIg//AeeQJp9y7vQN6BHisw/Fto6+kstp7NYruhnedzqEov5vAjQ6qSRVzi86xitzBAwRqUAoORosV42eDMqMXZDGpixJLRoExOMRsDEB0ILFB2CRiMlSyTsJgoU1ygRWlrXBzkGWNxR0vGsQYF454eqw5YplFgQEGpSD+LEltA1qAAEBHGGHXAuA6UGNE2KhcNpFLDyk9d3B2OgVZc4gzIawAlAPcMKBAUwGQMZNUBl60yTluEDSgxFRssBUt6A1gYOjxkDAfsis6MAM43GbEAiALPBP5pbGkhx53o8FDIDZ2TgZNnikIpEaG5BOQMq/IE0u6cxY1XwK0PwO1PwNIXYPkbcHcbWNmhql2rcv8BosJK9/eqryXP8nfgzldyfibzR+DmKr+FYkuof5NjJ9oKViqr2N1d+k+KtbW4w4s6eAbau3MUVL7kV0Z9H+vJss6JJiBAX3n5Hk5+XNzP92ITTcCDCNj73sbF/FzXli+IFglwpuu7DnBh6y3EmR44tF2al8fFmq/peMw6t+hAx7dyCwSprTI5Wf8WckGeFFdMc/IZSuZgnRNNQFQCDHlj72ssXzHva5yIku6AhxKoqh2VYn4+MctC2eubi1jYWMCV91dx6e0sZtbPY+r1NCbXplBZO9e18PIeourlXlornun1GVx4cxFz7y5jfmMei5vXWr2JE6tR32+U+DPQd+KmD8gTaCrIwIenpAP8OsIJi0eFJxzwcD88cezjqVsxRXhC+US20BtGg2NeccQIFR6GkEA/OyLT0T9GHJOV7PUtxARCBVR92YZCJpUZ+WKSTUxuhzAHdoBnBnHInysPqD/Mct+Lc/sR/aaflsgUkk0Sq9sZxKx3gJUGtw14AQgY/mIiNWqPbYuqxnFqYvHI5RgPSC5mhmztyR6cHtNKj36i9jCjEpsYpQZ3vQPMZFiP/iQwwGrkCQyw2LEflXcgtiwDDA59B/4CAAD//3DyKFIAAAAGSURBVAMAuZ8xXmrZ7vIAAAAASUVORK5CYII=",
+        "dominantColor": "#66733e"
+      },
+      "createdAt": "2025-10-17T14:02:09.408Z",
+      "updatedAt": "2025-10-24T13:37:42.579Z",
+      "lastMatchAt": "2025-10-24T07:59:00.000Z",
+      "notes": ""
+    },
+    {
+      "id": "50503548-47f3-44b2-9da0-6cea904da13b",
+      "name": "Yankit",
+      "handle": "Sailor",
+      "elo": 934.3402834669295,
+      "wins": 0,
+      "losses": 2,
+      "matches": 2,
+      "pointsFor": 21,
+      "pointsAgainst": 25,
+      "pointDiff": -4,
+      "avatar": {
+        "type": "base64",
+        "data": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAADMklEQVR4AeyZy27TQBSG/5k4SW+wS6mqCoFogWX7AJQ9bJBQhUpfgQU7bhKXt+AZqErFtZsikJAQbcOTdEkDpTfz/5OMMJEj5eLETuXKv8+ZMx7nO+eMY1WxAMJhlhIg//AeeQJp9y7vQN6BHisw/Fto6+kstp7NYruhnedzqEov5vAjQ6qSRVzi86xitzBAwRqUAoORosV42eDMqMXZDGpixJLRoExOMRsDEB0ILFB2CRiMlSyTsJgoU1ygRWlrXBzkGWNxR0vGsQYF454eqw5YplFgQEGpSD+LEltA1qAAEBHGGHXAuA6UGNE2KhcNpFLDyk9d3B2OgVZc4gzIawAlAPcMKBAUwGQMZNUBl60yTluEDSgxFRssBUt6A1gYOjxkDAfsis6MAM43GbEAiALPBP5pbGkhx53o8FDIDZ2TgZNnikIpEaG5BOQMq/IE0u6cxY1XwK0PwO1PwNIXYPkbcHcbWNmhql2rcv8BosJK9/eqryXP8nfgzldyfibzR+DmKr+FYkuof5NjJ9oKViqr2N1d+k+KtbW4w4s6eAbau3MUVL7kV0Z9H+vJss6JJiBAX3n5Hk5+XNzP92ITTcCDCNj73sbF/FzXli+IFglwpuu7DnBh6y3EmR44tF2al8fFmq/peMw6t+hAx7dyCwSprTI5Wf8WckGeFFdMc/IZSuZgnRNNQFQCDHlj72ssXzHva5yIku6AhxKoqh2VYn4+MctC2eubi1jYWMCV91dx6e0sZtbPY+r1NCbXplBZO9e18PIeourlXlornun1GVx4cxFz7y5jfmMei5vXWr2JE6tR32+U+DPQd+KmD8gTaCrIwIenpAP8OsIJi0eFJxzwcD88cezjqVsxRXhC+US20BtGg2NeccQIFR6GkEA/OyLT0T9GHJOV7PUtxARCBVR92YZCJpUZ+WKSTUxuhzAHdoBnBnHInysPqD/Mct+Lc/sR/aaflsgUkk0Sq9sZxKx3gJUGtw14AQgY/mIiNWqPbYuqxnFqYvHI5RgPSC5mhmztyR6cHtNKj36i9jCjEpsYpQZ3vQPMZFiP/iQwwGrkCQyw2LEflXcgtiwDDA59B/4CAAD//3DyKFIAAAAGSURBVAMAuZ8xXmrZ7vIAAAAASUVORK5CYII=",
+        "dominantColor": "#66733e"
+      },
+      "createdAt": "2025-10-17T14:02:27.955Z",
+      "updatedAt": "2025-10-24T13:37:42.578Z",
+      "lastMatchAt": "2025-10-21T04:07:00.000Z",
+      "notes": ""
+    },
+    {
+      "id": "c9032d27-d405-46ec-a56a-d21030bd38d3",
+      "name": "Rob",
+      "handle": "CallMeRob",
+      "elo": 1000,
+      "wins": 0,
+      "losses": 0,
+      "matches": 0,
+      "pointsFor": 0,
+      "pointsAgainst": 0,
+      "pointDiff": 0,
+      "avatar": {
+        "type": "base64",
+        "data": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAACSUlEQVR4AeyW203EMBBF7bRAHXxRAhJUATRBM3yCaALENw1QBGUEDqsJTjYejx/JbqQg7voxr3s99mo751y/ZSDgl/92/3cBp+7d3oG9A5UnsF+hygOsDu/6vndzcPdv7pwwx5G96BXqn2/c9eVF9Qm1SACXWJ6oAAI+Hq8cwYD1mqCmQKvbvX5+a/bBRrK1OkKtoXBi0t09fTn/8J5wO5ilI4dV+0+IA0tmOIPhCrGwBOJjLYKvFTk5Q66DAAphELDWQEGB5qfZJJ5R88MmvBhZC0YCZJNx6sheDBYC09icGI1LVAAFCVzikbciD0dVAA4tHznEAXlT4PBAyi8pQBKQDFg6AkkgX7vMgeTSRmoAzSe0mQVIUMuOSE5GSAPmOcgQME5bUmyc4X9Vk6tYAOUpbLlS+MZAjpjNsl8lgAI5Vwp/AcSBrEvHagEUtj5QfAXEyCOXvZKxSgAkQElhYlr8tioWUEMc8iFqchUJyClofeTkLLlSZgEUEISnNzfncQrkkbOe8w335EpRJ9zX5iYBOQk1othad0QVAHGgnYDYIAdkHRulIzF7uC8dCfem86gAK3ESWojjFyInRuMyEoCjICw2N4eAYM5u2ZN4xpS/8GIMfQcBU0PoNJ1bCk5jUuucnCHXPwHhRstCqVxTOyJyH3lnJU9yMC3aep37yP86oJGANNB8lrBRE6Q6EhVAMFiCXE7OVEc6773z/hju5dadE7w/5ui9d9EOuI387QJO3ahlOrCiql3Aioc9W2rvwOyxrLi5+Q78AAAA//93MLvkAAAABklEQVQDAA2sjEB1gIFgAAAAAElFTkSuQmCC",
+        "dominantColor": "#3e6081"
+      },
+      "createdAt": "2025-10-20T08:16:39.370Z",
+      "updatedAt": "2025-10-20T08:16:39.370Z",
+      "lastMatchAt": null,
+      "notes": ""
+    },
+    {
+      "id": "5853ef63-dd4d-4597-860c-1f0fb358a212",
+      "name": "Raul",
+      "handle": "Raul",
+      "elo": 1000,
+      "wins": 0,
+      "losses": 0,
+      "matches": 0,
+      "pointsFor": 0,
+      "pointsAgainst": 0,
+      "pointDiff": 0,
+      "avatar": {
+        "type": "base64",
+        "data": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAADpUlEQVR4AexXzW/URhT/vZm1vW4IZIFQNT30UKlSbz31UFpKKxUlVNBrv/6C9tZbD71WVXuteqoqVXwd+RASixAghAQCInFAfIgT3AgEBJuwu971zPDGISaLHe8GZe21FGt+4/Gbt36/37zxzKwAYMoMK4D5l7dsCCg6dxsZKDwDFecoNCYYKCWECqvw5L8g8lDGK/oGQj3GAo5BwSmdhkiAZU0GcOkEhD+L0BpKgljAMl9qP4JHp1CrHkOjMrFsHtl7QsAy00bg4V3z//LjyN5XFWAZN7WLxpZt3Mx04/7iSl9mtcZBbB07AxUadHVn5NBXgB3bZ80OXKeOqjyPv/68xh+7MzIYSIAVsQSN335tINrxlgyF130FGBkkSAr3OC+18wl7EYa+Am7e3J/kpT24YpY3v0OFZ6OvgA8/oKSAlxaibZB8luqoey8t+d8yBRjyYOkvtL5clZkxPqrOHQhRx3wXaPCMyxOpAogCkBH4/rtbEfG3PAWiLgzp6Hm16h33KprjUxivUm6IBRip0NKfIOxOo9vdB2X24NDBnyOuBB9KsY37Wp1ptPU07s9/FvWtrBQ9wVT4Hz7CASB+M4Z6xWFISYhgE4Tk2EKkBhVs9yo8TR4D722/mOpjjTdoO6b0YZBgZ2sYInqYev45gE+lmfF4Fu2YrGe62M45qmFcH7HNoaJHAHh1F7IOh9JH9/NdP0FU+pO3jD16jF24bptDxWsClmKFbvqyeOHsP0sOGbVdlXwzgab+ESfxe4bn+nSlCpjc8Xf89jCIm4AzByNbKwy9TVPhdbQisYDdMPBygUDiEnh4/woUmGhTwfXruDzLn4a2jm9DhA9sIxWecxqm+ymEaeeHBBPRgiGFRd6gaOxE1L3z4zq21M6zigDN4IfItrIyJDgzAdrPX2VuZf8w28kMaA9SnkGNP2YiP469uBBA8HHar16KbQSNrZPnYNQeHvlvYnuejaSANURXai/m5v5Ywy/W3/XNBPCxot38CiBA5rXlIv0S6eZsazfcB7fKW3a2Wy69axbwdPELSMqF20BBBhLwvrmN0HzL2ItNYz40iZFBXwGhnMFd/MLT/RnDjBwyBRixGRQOlMnCnFYXIDWU2l0YsUEDpwrQDv95MV/zdOGzzaBvKsivR4Ay+6HMDEyH540qiNEaw8YCtDfDPx39EWeSPUUYuRkdO+rtHntpHgTCnXCYrk3FuiHn93G48hY76OVlz8w3BPAgFFpKn4EXAAAA//9QJ6XtAAAABklEQVQDAGikiE+DuA98AAAAAElFTkSuQmCC",
+        "dominantColor": "#953a58"
+      },
+      "createdAt": "2025-10-20T08:23:25.589Z",
+      "updatedAt": "2025-10-20T08:23:25.589Z",
+      "lastMatchAt": null,
+      "notes": ""
+    },
+    {
+      "id": "ddd2cee2-4194-43b1-9d48-14800c419f8e",
+      "name": "Mializo",
+      "handle": "Mia",
+      "elo": 1000,
+      "wins": 0,
+      "losses": 0,
+      "matches": 0,
+      "pointsFor": 0,
+      "pointsAgainst": 0,
+      "pointDiff": 0,
+      "avatar": {
+        "type": "base64",
+        "data": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAAvUlEQVR4AeySQQoCQQwEkwXB9/gA8W0+zlcJUe9zaGx6QtiGzWXI9E6qckRETa7fAN/3z/08QLc7G7ABksD8FaqqYOp9v0VnzTdArmD7dRvoVmADNkAS8AqRAOnrNkAjJAPOZIBEJbpuAyKwcCxt4PK4RmfRA8CoRI0eQAQWjrUBGJWo0QZEYOFYG4BRiRptQAQWjrUBGJWo0QZEYOHYIzMj8/+q5ys6yyu0dL3x0AY2wl7+ygaWWDYejjfwAQAA//9s6JvgAAAABklEQVQDAAhZ4DEfG6VoAAAAAElFTkSuQmCC",
+        "dominantColor": "#716251"
+      },
+      "createdAt": "2025-10-20T08:24:16.997Z",
+      "updatedAt": "2025-10-20T08:24:16.997Z",
+      "lastMatchAt": null,
+      "notes": ""
+    },
+    {
+      "id": "5899a628-6494-4239-a78e-6d78faa96157",
+      "name": "Baley",
+      "handle": "RedDevil",
+      "elo": 1005.5849728840359,
+      "wins": 1,
+      "losses": 1,
+      "matches": 2,
+      "pointsFor": 17,
+      "pointsAgainst": 21,
+      "pointDiff": -4,
+      "avatar": {
+        "type": "base64",
+        "data": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAABtklEQVR4AeyVMU7DUAyGn3INNujOAhNFPQFscAU2WJgZuEGvARusLFG7lYW9sCFxC+CzZMmEl1ApjYOlJ/Wv/9hOnu3faauU0mdk0MB3/XE/pYGxtSsKFAV6TqCsUM8B9r69KNB7hD0fUE2PLtO28LB7kLwhK7RYzlvnYGOW2xva/DZnKC4NHE+v5Pmz2b5Y+6UxfPCunJPXVfKGNEBxoK5fMFlMJjvi78qRBOcvaaBrBTS2Xr8n5c0a1f+4d5i8IQ2wGhR1d3+D+QGN4YT/lUOeJ6QBneD52e2vszVGAN6V473/nCcNMFktEAsoFksMDpTjB/iw+LHe68N50gCHAy0kxzWmtpnD9RiQBnSSuQJszHKbq34k9YY0oFPVQihOOTH4YjlPyokD/Fj82DEgDejBtpAm12u13GM516uL6+QNaUAnSRFN2JjlNk/9H0918oY00JykLc7GLG/LsX4PXjG9bcH7BeY8UcBjUkOdUfFnEBnxFWCPIqOs0FAv56bPrSKvD7XHf4kj/4RSe3wFTt+eU2TEV2DTn6v/mlcUGFuZokBWAUdnUcBx2NmjigLZsTg6wyvwBQAA///+Bc7EAAAABklEQVQDAPNcO21IpvcuAAAAAElFTkSuQmCC",
+        "dominantColor": "#5f3d47"
+      },
+      "createdAt": "2025-10-21T21:33:48.838Z",
+      "updatedAt": "2025-10-24T13:37:42.579Z",
+      "lastMatchAt": "2025-10-21T21:07:00.000Z",
+      "notes": ""
+    },
+    {
+      "id": "44539b66-3d2f-401a-afd2-40f706b9447e",
+      "name": "Barny",
+      "handle": "Barny",
+      "elo": 955.3093012034008,
+      "wins": 0,
+      "losses": 1,
+      "matches": 1,
+      "pointsFor": 8,
+      "pointsAgainst": 11,
+      "pointDiff": -3,
+      "avatar": {
+        "type": "base64",
+        "data": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAAsUlEQVR4AeySuw3CQBAFV9cBHRARUwEN0C8lEBJSAAXQgj/5BZZGuvOTRvImJ7+1b+a1qlqSZ7/A9v+5jxeY7U4DGoAE8iv0udwqefINwApOj2tgtgINaAASsEIQII7nG7j/v5U8+QaOl/Ccb2pgthcNaAASsEIQII636+tRyWOFcAfgAg1AgDiuAYwQLtAABIjjGsAI4YL2e74reaxQtwEDDzUwEHb3UxroYhl4GG9gBQAA//+feNlEAAAABklEQVQDAHxFUEAtvSelAAAAAElFTkSuQmCC",
+        "dominantColor": "#6b634b"
+      },
+      "createdAt": "2025-10-24T12:03:54.766Z",
+      "updatedAt": "2025-10-24T13:37:42.579Z",
+      "lastMatchAt": "2025-10-24T07:58:00.000Z",
+      "notes": ""
+    }
+  ],
+  "matches": [
+    {
+      "id": "509edbc3-6072-41ee-a846-fbb8a88a8885",
+      "date": "2025-10-20T10:06:00.000Z",
+      "playerA": "f25501a5-f72a-43a5-8fa0-623e1a492734",
+      "playerB": "50503548-47f3-44b2-9da0-6cea904da13b",
+      "sets": [
+        {
+          "a": 12,
+          "b": 10
+        }
+      ],
+      "winner": "f25501a5-f72a-43a5-8fa0-623e1a492734",
+      "loser": "50503548-47f3-44b2-9da0-6cea904da13b",
+      "totalPointsA": 12,
+      "totalPointsB": 10,
+      "pointDiffAbs": 2,
+      "eloChangeA": 33.58,
+      "eloChangeB": -33.58,
+      "notes": ""
+    },
+    {
+      "id": "87a1642d-92b3-4106-9d0f-03b92a7ac500",
+      "date": "2025-10-20T10:06:00.000Z",
+      "playerA": "f25501a5-f72a-43a5-8fa0-623e1a492734",
+      "playerB": "34cc4212-a0eb-4f1c-949b-538638867679",
+      "sets": [
+        {
+          "a": 12,
+          "b": 10
+        }
+      ],
+      "winner": "f25501a5-f72a-43a5-8fa0-623e1a492734",
+      "loser": "34cc4212-a0eb-4f1c-949b-538638867679",
+      "totalPointsA": 12,
+      "totalPointsB": 10,
+      "pointDiffAbs": 2,
+      "eloChangeA": 30.34,
+      "eloChangeB": -30.34,
+      "notes": ""
+    },
+    {
+      "id": "8a85eb0b-88bd-46fa-affe-6a454d0c2da4",
+      "date": "2025-10-20T10:06:00.000Z",
+      "playerA": "f25501a5-f72a-43a5-8fa0-623e1a492734",
+      "playerB": "0bd3fdc7-d07f-4c35-8e7e-b98b27af4991",
+      "sets": [
+        {
+          "a": 13,
+          "b": 11
+        }
+      ],
+      "winner": "f25501a5-f72a-43a5-8fa0-623e1a492734",
+      "loser": "0bd3fdc7-d07f-4c35-8e7e-b98b27af4991",
+      "totalPointsA": 13,
+      "totalPointsB": 11,
+      "pointDiffAbs": 2,
+      "eloChangeA": 27.47,
+      "eloChangeB": -27.47,
+      "notes": ""
+    },
+    {
+      "id": "ba73e09c-326d-4939-8675-941ae0923bb0",
+      "date": "2025-10-20T10:07:00.000Z",
+      "playerA": "0bd3fdc7-d07f-4c35-8e7e-b98b27af4991",
+      "playerB": "34cc4212-a0eb-4f1c-949b-538638867679",
+      "sets": [
+        {
+          "a": 11,
+          "b": 9
+        }
+      ],
+      "winner": "0bd3fdc7-d07f-4c35-8e7e-b98b27af4991",
+      "loser": "34cc4212-a0eb-4f1c-949b-538638867679",
+      "totalPointsA": 11,
+      "totalPointsB": 9,
+      "pointDiffAbs": 2,
+      "eloChangeA": 33.3,
+      "eloChangeB": -33.3,
+      "notes": ""
+    },
+    {
+      "id": "51e6a18a-08d8-4d7d-b4d4-ef0f6f338fda",
+      "date": "2025-10-20T12:43:00.000Z",
+      "playerA": "34cc4212-a0eb-4f1c-949b-538638867679",
+      "playerB": "0bd3fdc7-d07f-4c35-8e7e-b98b27af4991",
+      "sets": [
+        {
+          "a": 12,
+          "b": 10
+        }
+      ],
+      "winner": "34cc4212-a0eb-4f1c-949b-538638867679",
+      "loser": "0bd3fdc7-d07f-4c35-8e7e-b98b27af4991",
+      "totalPointsA": 12,
+      "totalPointsB": 10,
+      "pointDiffAbs": 2,
+      "eloChangeA": 40.2,
+      "eloChangeB": -40.2,
+      "notes": ""
+    },
+    {
+      "id": "12478dfb-98ac-4646-88c4-44f12f297305",
+      "date": "2025-10-20T12:44:00.000Z",
+      "playerA": "f25501a5-f72a-43a5-8fa0-623e1a492734",
+      "playerB": "34cc4212-a0eb-4f1c-949b-538638867679",
+      "sets": [
+        {
+          "a": 11,
+          "b": 6
+        }
+      ],
+      "winner": "f25501a5-f72a-43a5-8fa0-623e1a492734",
+      "loser": "34cc4212-a0eb-4f1c-949b-538638867679",
+      "totalPointsA": 11,
+      "totalPointsB": 6,
+      "pointDiffAbs": 5,
+      "eloChangeA": 30.42,
+      "eloChangeB": -30.42,
+      "notes": ""
+    },
+    {
+      "id": "386d87c3-1c51-4958-b037-038053c1efa8",
+      "date": "2025-10-20T12:44:00.000Z",
+      "playerA": "34cc4212-a0eb-4f1c-949b-538638867679",
+      "playerB": "b0f0196a-bcea-4d48-8463-e805fbbdcb6d",
+      "sets": [
+        {
+          "a": 12,
+          "b": 10
+        }
+      ],
+      "winner": "34cc4212-a0eb-4f1c-949b-538638867679",
+      "loser": "b0f0196a-bcea-4d48-8463-e805fbbdcb6d",
+      "totalPointsA": 12,
+      "totalPointsB": 10,
+      "pointDiffAbs": 2,
+      "eloChangeA": 38.74,
+      "eloChangeB": -38.74,
+      "notes": ""
+    },
+    {
+      "id": "62833fc4-a193-4d15-9716-4b6916553710",
+      "date": "2025-10-20T15:08:00.000Z",
+      "playerA": "b0f0196a-bcea-4d48-8463-e805fbbdcb6d",
+      "playerB": "f25501a5-f72a-43a5-8fa0-623e1a492734",
+      "sets": [
+        {
+          "a": 14,
+          "b": 12
+        }
+      ],
+      "winner": "b0f0196a-bcea-4d48-8463-e805fbbdcb6d",
+      "loser": "f25501a5-f72a-43a5-8fa0-623e1a492734",
+      "totalPointsA": 14,
+      "totalPointsB": 12,
+      "pointDiffAbs": 2,
+      "eloChangeA": 48.08,
+      "eloChangeB": -48.08,
+      "notes": ""
+    },
+    {
+      "id": "b08c9c6a-fb17-4e27-91ce-864138f3be9c",
+      "date": "2025-10-20T15:08:00.000Z",
+      "playerA": "f25501a5-f72a-43a5-8fa0-623e1a492734",
+      "playerB": "b0f0196a-bcea-4d48-8463-e805fbbdcb6d",
+      "sets": [
+        {
+          "a": 12,
+          "b": 10
+        }
+      ],
+      "winner": "f25501a5-f72a-43a5-8fa0-623e1a492734",
+      "loser": "b0f0196a-bcea-4d48-8463-e805fbbdcb6d",
+      "totalPointsA": 12,
+      "totalPointsB": 10,
+      "pointDiffAbs": 2,
+      "eloChangeA": 27.42,
+      "eloChangeB": -27.42,
+      "notes": ""
+    },
+    {
+      "id": "1ab6f350-303b-4212-a37d-3bdac5cc8284",
+      "date": "2025-10-21T04:07:00.000Z",
+      "playerA": "b0f0196a-bcea-4d48-8463-e805fbbdcb6d",
+      "playerB": "50503548-47f3-44b2-9da0-6cea904da13b",
+      "sets": [
+        {
+          "a": 13,
+          "b": 11
+        }
+      ],
+      "winner": "b0f0196a-bcea-4d48-8463-e805fbbdcb6d",
+      "loser": "50503548-47f3-44b2-9da0-6cea904da13b",
+      "totalPointsA": 13,
+      "totalPointsB": 11,
+      "pointDiffAbs": 2,
+      "eloChangeA": 32.08,
+      "eloChangeB": -32.08,
+      "notes": ""
+    },
+    {
+      "id": "549cea3c-c0fd-4581-bec2-e168ad3625b9",
+      "date": "2025-10-21T04:07:00.000Z",
+      "playerA": "b0f0196a-bcea-4d48-8463-e805fbbdcb6d",
+      "playerB": "f25501a5-f72a-43a5-8fa0-623e1a492734",
+      "sets": [
+        {
+          "a": 11,
+          "b": 8
+        }
+      ],
+      "winner": "b0f0196a-bcea-4d48-8463-e805fbbdcb6d",
+      "loser": "f25501a5-f72a-43a5-8fa0-623e1a492734",
+      "totalPointsA": 11,
+      "totalPointsB": 8,
+      "pointDiffAbs": 3,
+      "eloChangeA": 47.56,
+      "eloChangeB": -47.56,
+      "notes": ""
+    },
+    {
+      "id": "b9668eff-b486-42f5-9bdb-4aadefcc70fe",
+      "date": "2025-10-21T04:07:00.000Z",
+      "playerA": "f25501a5-f72a-43a5-8fa0-623e1a492734",
+      "playerB": "0bd3fdc7-d07f-4c35-8e7e-b98b27af4991",
+      "sets": [
+        {
+          "a": 11,
+          "b": 6
+        }
+      ],
+      "winner": "f25501a5-f72a-43a5-8fa0-623e1a492734",
+      "loser": "0bd3fdc7-d07f-4c35-8e7e-b98b27af4991",
+      "totalPointsA": 11,
+      "totalPointsB": 6,
+      "pointDiffAbs": 5,
+      "eloChangeA": 33.59,
+      "eloChangeB": -33.59,
+      "notes": ""
+    },
+    {
+      "id": "d23dbee8-2aca-40b9-872e-280d4cc6d4d1",
+      "date": "2025-10-21T04:07:00.000Z",
+      "playerA": "34cc4212-a0eb-4f1c-949b-538638867679",
+      "playerB": "0bd3fdc7-d07f-4c35-8e7e-b98b27af4991",
+      "sets": [
+        {
+          "a": 17,
+          "b": 15
+        },
+        {
+          "a": 11,
+          "b": 7
+        },
+        {
+          "a": 11,
+          "b": 7
+        }
+      ],
+      "winner": "34cc4212-a0eb-4f1c-949b-538638867679",
+      "loser": "0bd3fdc7-d07f-4c35-8e7e-b98b27af4991",
+      "totalPointsA": 39,
+      "totalPointsB": 29,
+      "pointDiffAbs": 10,
+      "eloChangeA": 46.16,
+      "eloChangeB": -46.16,
+      "notes": ""
+    },
+    {
+      "id": "e89b75fc-5370-4d65-a086-4f582ec7e1a6",
+      "date": "2025-10-21T06:07:00.000Z",
+      "playerA": "f25501a5-f72a-43a5-8fa0-623e1a492734",
+      "playerB": "34cc4212-a0eb-4f1c-949b-538638867679",
+      "sets": [
+        {
+          "a": 11,
+          "b": 8
+        },
+        {
+          "a": 11,
+          "b": 9
+        },
+        {
+          "a": 11,
+          "b": 8
+        },
+        {
+          "a": 11,
+          "b": 6
+        }
+      ],
+      "winner": "f25501a5-f72a-43a5-8fa0-623e1a492734",
+      "loser": "34cc4212-a0eb-4f1c-949b-538638867679",
+      "totalPointsA": 44,
+      "totalPointsB": 31,
+      "pointDiffAbs": 13,
+      "eloChangeA": 48.9,
+      "eloChangeB": -48.9,
+      "notes": ""
+    },
+    {
+      "id": "c651a8e3-e1c8-4737-9ffe-071eab53251a",
+      "date": "2025-10-21T10:07:00.000Z",
+      "playerA": "f25501a5-f72a-43a5-8fa0-623e1a492734",
+      "playerB": "ab2998ee-a291-4a17-8270-4254e2b24305",
+      "sets": [
+        {
+          "a": 11,
+          "b": 7
+        }
+      ],
+      "winner": "f25501a5-f72a-43a5-8fa0-623e1a492734",
+      "loser": "ab2998ee-a291-4a17-8270-4254e2b24305",
+      "totalPointsA": 11,
+      "totalPointsB": 7,
+      "pointDiffAbs": 4,
+      "eloChangeA": 26.19,
+      "eloChangeB": -26.19,
+      "notes": ""
+    },
+    {
+      "id": "1133d07d-fe40-4195-85f7-f06dbc07c821",
+      "date": "2025-10-21T21:07:00.000Z",
+      "playerA": "b0f0196a-bcea-4d48-8463-e805fbbdcb6d",
+      "playerB": "f25501a5-f72a-43a5-8fa0-623e1a492734",
+      "sets": [
+        {
+          "a": 14,
+          "b": 12
+        }
+      ],
+      "winner": "b0f0196a-bcea-4d48-8463-e805fbbdcb6d",
+      "loser": "f25501a5-f72a-43a5-8fa0-623e1a492734",
+      "totalPointsA": 14,
+      "totalPointsB": 12,
+      "pointDiffAbs": 2,
+      "eloChangeA": 43.05,
+      "eloChangeB": -43.05,
+      "notes": ""
+    },
+    {
+      "id": "60f06509-0996-45cd-a529-dcf63340f371",
+      "date": "2025-10-21T21:07:00.000Z",
+      "playerA": "5899a628-6494-4239-a78e-6d78faa96157",
+      "playerB": "f25501a5-f72a-43a5-8fa0-623e1a492734",
+      "sets": [
+        {
+          "a": 12,
+          "b": 10
+        }
+      ],
+      "winner": "5899a628-6494-4239-a78e-6d78faa96157",
+      "loser": "f25501a5-f72a-43a5-8fa0-623e1a492734",
+      "totalPointsA": 12,
+      "totalPointsB": 10,
+      "pointDiffAbs": 2,
+      "eloChangeA": 44.67,
+      "eloChangeB": -44.67,
+      "notes": ""
+    },
+    {
+      "id": "fcd843cc-f0e4-4e1f-b45e-562c80a2deff",
+      "date": "2025-10-21T21:07:00.000Z",
+      "playerA": "b0f0196a-bcea-4d48-8463-e805fbbdcb6d",
+      "playerB": "5899a628-6494-4239-a78e-6d78faa96157",
+      "sets": [
+        {
+          "a": 11,
+          "b": 5
+        }
+      ],
+      "winner": "b0f0196a-bcea-4d48-8463-e805fbbdcb6d",
+      "loser": "5899a628-6494-4239-a78e-6d78faa96157",
+      "totalPointsA": 11,
+      "totalPointsB": 5,
+      "pointDiffAbs": 6,
+      "eloChangeA": 39.08,
+      "eloChangeB": -39.08,
+      "notes": ""
+    },
+    {
+      "id": "a571370a-ee65-4067-b23f-752e744a9336",
+      "date": "2025-10-22T19:07:00.000Z",
+      "playerA": "f25501a5-f72a-43a5-8fa0-623e1a492734",
+      "playerB": "68b97367-6dcd-4259-b225-a1dc90fff8be",
+      "sets": [
+        {
+          "a": 12,
+          "b": 10
+        }
+      ],
+      "winner": "f25501a5-f72a-43a5-8fa0-623e1a492734",
+      "loser": "68b97367-6dcd-4259-b225-a1dc90fff8be",
+      "totalPointsA": 12,
+      "totalPointsB": 10,
+      "pointDiffAbs": 2,
+      "eloChangeA": 26.48,
+      "eloChangeB": -26.48,
+      "notes": ""
+    },
+    {
+      "id": "fdcaa498-fff7-4a69-b10d-9af222ac8ba2",
+      "date": "2025-10-22T19:07:00.000Z",
+      "playerA": "b0f0196a-bcea-4d48-8463-e805fbbdcb6d",
+      "playerB": "f25501a5-f72a-43a5-8fa0-623e1a492734",
+      "sets": [
+        {
+          "a": 14,
+          "b": 12
+        }
+      ],
+      "winner": "b0f0196a-bcea-4d48-8463-e805fbbdcb6d",
+      "loser": "f25501a5-f72a-43a5-8fa0-623e1a492734",
+      "totalPointsA": 14,
+      "totalPointsB": 12,
+      "pointDiffAbs": 2,
+      "eloChangeA": 29.48,
+      "eloChangeB": -29.48,
+      "notes": ""
+    },
+    {
+      "id": "0ea70a9e-7ea0-43a2-9df2-3ce618d6478e",
+      "date": "2025-10-23T11:41:00.000Z",
+      "playerA": "b0f0196a-bcea-4d48-8463-e805fbbdcb6d",
+      "playerB": "f25501a5-f72a-43a5-8fa0-623e1a492734",
+      "sets": [
+        {
+          "a": 11,
+          "b": 8
+        }
+      ],
+      "winner": "b0f0196a-bcea-4d48-8463-e805fbbdcb6d",
+      "loser": "f25501a5-f72a-43a5-8fa0-623e1a492734",
+      "totalPointsA": 11,
+      "totalPointsB": 8,
+      "pointDiffAbs": 3,
+      "eloChangeA": 27.32,
+      "eloChangeB": -27.32,
+      "notes": ""
+    },
+    {
+      "id": "24d2491b-f794-443c-8e55-a13b792fbdca",
+      "date": "2025-10-24T07:57:00.000Z",
+      "playerA": "b0f0196a-bcea-4d48-8463-e805fbbdcb6d",
+      "playerB": "f25501a5-f72a-43a5-8fa0-623e1a492734",
+      "sets": [
+        {
+          "a": 14,
+          "b": 12
+        }
+      ],
+      "winner": "b0f0196a-bcea-4d48-8463-e805fbbdcb6d",
+      "loser": "f25501a5-f72a-43a5-8fa0-623e1a492734",
+      "totalPointsA": 14,
+      "totalPointsB": 12,
+      "pointDiffAbs": 2,
+      "eloChangeA": 19.42,
+      "eloChangeB": -19.42,
+      "notes": ""
+    },
+    {
+      "id": "57c0a20c-ba7a-447a-89a3-6bafcf1b8fbf",
+      "date": "2025-10-24T07:57:00.000Z",
+      "playerA": "34cc4212-a0eb-4f1c-949b-538638867679",
+      "playerB": "0bd3fdc7-d07f-4c35-8e7e-b98b27af4991",
+      "sets": [
+        {
+          "a": 12,
+          "b": 10
+        },
+        {
+          "a": 11,
+          "b": 7
+        },
+        {
+          "a": 15,
+          "b": 13
+        }
+      ],
+      "winner": "34cc4212-a0eb-4f1c-949b-538638867679",
+      "loser": "0bd3fdc7-d07f-4c35-8e7e-b98b27af4991",
+      "totalPointsA": 38,
+      "totalPointsB": 30,
+      "pointDiffAbs": 8,
+      "eloChangeA": 37.33,
+      "eloChangeB": -37.33,
+      "notes": ""
+    },
+    {
+      "id": "f4934906-2107-499a-8f8e-39320c660c79",
+      "date": "2025-10-24T07:57:00.000Z",
+      "playerA": "f25501a5-f72a-43a5-8fa0-623e1a492734",
+      "playerB": "0bd3fdc7-d07f-4c35-8e7e-b98b27af4991",
+      "sets": [
+        {
+          "a": 11,
+          "b": 9
+        }
+      ],
+      "winner": "f25501a5-f72a-43a5-8fa0-623e1a492734",
+      "loser": "0bd3fdc7-d07f-4c35-8e7e-b98b27af4991",
+      "totalPointsA": 11,
+      "totalPointsB": 9,
+      "pointDiffAbs": 2,
+      "eloChangeA": 17.87,
+      "eloChangeB": -17.87,
+      "notes": ""
+    },
+    {
+      "id": "0d7ace00-0a47-4678-82a1-fa4dd97534e7",
+      "date": "2025-10-24T07:58:00.000Z",
+      "playerA": "ab2998ee-a291-4a17-8270-4254e2b24305",
+      "playerB": "a786db3a-bb10-4618-8aa9-bec755384f9f",
+      "sets": [
+        {
+          "a": 11,
+          "b": 6
+        }
+      ],
+      "winner": "ab2998ee-a291-4a17-8270-4254e2b24305",
+      "loser": "a786db3a-bb10-4618-8aa9-bec755384f9f",
+      "totalPointsA": 11,
+      "totalPointsB": 6,
+      "pointDiffAbs": 5,
+      "eloChangeA": 48.03,
+      "eloChangeB": -48.03,
+      "notes": ""
+    },
+    {
+      "id": "48b8e5e3-6b47-43c0-928f-e925cefe453b",
+      "date": "2025-10-24T07:58:00.000Z",
+      "playerA": "0bd3fdc7-d07f-4c35-8e7e-b98b27af4991",
+      "playerB": "f25501a5-f72a-43a5-8fa0-623e1a492734",
+      "sets": [
+        {
+          "a": 11,
+          "b": 9
+        }
+      ],
+      "winner": "0bd3fdc7-d07f-4c35-8e7e-b98b27af4991",
+      "loser": "f25501a5-f72a-43a5-8fa0-623e1a492734",
+      "totalPointsA": 11,
+      "totalPointsB": 9,
+      "pointDiffAbs": 2,
+      "eloChangeA": 51.85,
+      "eloChangeB": -51.85,
+      "notes": ""
+    },
+    {
+      "id": "60448d12-e09d-42f6-9df5-3ed4502be3aa",
+      "date": "2025-10-24T07:58:00.000Z",
+      "playerA": "0bd3fdc7-d07f-4c35-8e7e-b98b27af4991",
+      "playerB": "ab2998ee-a291-4a17-8270-4254e2b24305",
+      "sets": [
+        {
+          "a": 11,
+          "b": 9
+        },
+        {
+          "a": 11,
+          "b": 9
+        }
+      ],
+      "winner": "0bd3fdc7-d07f-4c35-8e7e-b98b27af4991",
+      "loser": "ab2998ee-a291-4a17-8270-4254e2b24305",
+      "totalPointsA": 22,
+      "totalPointsB": 18,
+      "pointDiffAbs": 4,
+      "eloChangeA": 57.65,
+      "eloChangeB": -57.65,
+      "notes": ""
+    },
+    {
+      "id": "bbf5336d-9354-4535-ad34-eebab1ef4c00",
+      "date": "2025-10-24T07:58:00.000Z",
+      "playerA": "0bd3fdc7-d07f-4c35-8e7e-b98b27af4991",
+      "playerB": "44539b66-3d2f-401a-afd2-40f706b9447e",
+      "sets": [
+        {
+          "a": 11,
+          "b": 8
+        }
+      ],
+      "winner": "0bd3fdc7-d07f-4c35-8e7e-b98b27af4991",
+      "loser": "44539b66-3d2f-401a-afd2-40f706b9447e",
+      "totalPointsA": 11,
+      "totalPointsB": 8,
+      "pointDiffAbs": 3,
+      "eloChangeA": 44.69,
+      "eloChangeB": -44.69,
+      "notes": ""
+    },
+    {
+      "id": "31a442fd-7d2d-43e3-8027-13862b64b184",
+      "date": "2025-10-24T07:59:00.000Z",
+      "playerA": "a786db3a-bb10-4618-8aa9-bec755384f9f",
+      "playerB": "ab2998ee-a291-4a17-8270-4254e2b24305",
+      "sets": [
+        {
+          "a": 11,
+          "b": 6
+        }
+      ],
+      "winner": "a786db3a-bb10-4618-8aa9-bec755384f9f",
+      "loser": "ab2998ee-a291-4a17-8270-4254e2b24305",
+      "totalPointsA": 11,
+      "totalPointsB": 6,
+      "pointDiffAbs": 5,
+      "eloChangeA": 46.24,
+      "eloChangeB": -46.24,
+      "notes": ""
+    },
+    {
+      "id": "5d6e6588-d865-4c55-b4c7-83748bcae2a6",
+      "date": "2025-10-24T07:59:00.000Z",
+      "playerA": "ab2998ee-a291-4a17-8270-4254e2b24305",
+      "playerB": "34cc4212-a0eb-4f1c-949b-538638867679",
+      "sets": [
+        {
+          "a": 11,
+          "b": 9
+        }
+      ],
+      "winner": "ab2998ee-a291-4a17-8270-4254e2b24305",
+      "loser": "34cc4212-a0eb-4f1c-949b-538638867679",
+      "totalPointsA": 11,
+      "totalPointsB": 9,
+      "pointDiffAbs": 2,
+      "eloChangeA": 43.12,
+      "eloChangeB": -43.12,
+      "notes": ""
+    },
+    {
+      "id": "678001f2-243d-4606-9023-6e913c0497af",
+      "date": "2025-10-25T05:56:00.000Z",
+      "playerA": "a786db3a-bb10-4618-8aa9-bec755384f9f",
+      "playerB": "34cc4212-a0eb-4f1c-949b-538638867679",
+      "sets": [
+        {
+          "a": 11,
+          "b": 9
+        }
+      ],
+      "winner": "a786db3a-bb10-4618-8aa9-bec755384f9f",
+      "loser": "34cc4212-a0eb-4f1c-949b-538638867679",
+      "totalPointsA": 11,
+      "totalPointsB": 9,
+      "pointDiffAbs": 2,
+      "eloChangeA": 31.47,
+      "eloChangeB": -31.47,
+      "notes": ""
+    },
+    {
+      "id": "e5688833-7a5d-4f7f-9e52-e61090d2d00f",
+      "date": "2025-10-25T05:57:00.000Z",
+      "playerA": "a786db3a-bb10-4618-8aa9-bec755384f9f",
+      "playerB": "0bd3fdc7-d07f-4c35-8e7e-b98b27af4991",
+      "sets": [
+        {
+          "a": 14,
+          "b": 12
+        },
+        {
+          "a": 7,
+          "b": 11
+        }
+      ],
+      "winner": "0bd3fdc7-d07f-4c35-8e7e-b98b27af4991",
+      "loser": "a786db3a-bb10-4618-8aa9-bec755384f9f",
+      "totalPointsA": 21,
+      "totalPointsB": 23,
+      "pointDiffAbs": 2,
+      "eloChangeA": -37.88,
+      "eloChangeB": 37.88,
+      "notes": ""
+    },
+    {
+      "id": "695005be-4a70-4849-9db5-6eda745e98ad",
+      "date": "2025-10-25T07:57:00.000Z",
+      "playerA": "0bd3fdc7-d07f-4c35-8e7e-b98b27af4991",
+      "playerB": "f25501a5-f72a-43a5-8fa0-623e1a492734",
+      "sets": [
+        {
+          "a": 11,
+          "b": 7
+        }
+      ],
+      "winner": "0bd3fdc7-d07f-4c35-8e7e-b98b27af4991",
+      "loser": "f25501a5-f72a-43a5-8fa0-623e1a492734",
+      "totalPointsA": 11,
+      "totalPointsB": 7,
+      "pointDiffAbs": 4,
+      "eloChangeA": 37.93,
+      "eloChangeB": -37.93,
+      "notes": ""
+    },
+    {
+      "id": "1752d575-33ae-4dcd-a5a3-d938a1fa101d",
+      "date": "2025-10-25T07:58:00.000Z",
+      "playerA": "f25501a5-f72a-43a5-8fa0-623e1a492734",
+      "playerB": "a786db3a-bb10-4618-8aa9-bec755384f9f",
+      "sets": [
+        {
+          "a": 11,
+          "b": 9
+        }
+      ],
+      "winner": "f25501a5-f72a-43a5-8fa0-623e1a492734",
+      "loser": "a786db3a-bb10-4618-8aa9-bec755384f9f",
+      "totalPointsA": 11,
+      "totalPointsB": 9,
+      "pointDiffAbs": 2,
+      "eloChangeA": 37.32,
+      "eloChangeB": -37.32,
+      "notes": ""
+    },
+    {
+      "id": "a99c8c17-4a70-48b5-ba9a-2de35611bc88",
+      "date": "2025-10-25T08:00:00.000Z",
+      "playerA": "34cc4212-a0eb-4f1c-949b-538638867679",
+      "playerB": "f25501a5-f72a-43a5-8fa0-623e1a492734",
+      "sets": [
+        {
+          "a": 12,
+          "b": 10
+        }
+      ],
+      "winner": "34cc4212-a0eb-4f1c-949b-538638867679",
+      "loser": "f25501a5-f72a-43a5-8fa0-623e1a492734",
+      "totalPointsA": 12,
+      "totalPointsB": 10,
+      "pointDiffAbs": 2,
+      "eloChangeA": 37.93,
+      "eloChangeB": -37.93,
+      "notes": ""
+    }
+  ]
+}
